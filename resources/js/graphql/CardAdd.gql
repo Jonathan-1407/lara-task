@@ -1,0 +1,13 @@
+mutation CardAdd($title: String!, $order: Int!, $list_id: ID!, $owner_id: ID!) {
+    cardAdd(
+        input: {
+            title: $title
+            order: $order
+            list_id: $list_id
+            owner_id: $owner_id
+        }
+    ) {
+        id
+        title
+    }
+}
