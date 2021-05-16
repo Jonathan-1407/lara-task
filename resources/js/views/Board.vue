@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen flex flex-col items-stretch bg-purple-500">
+    <div class="h-screen h-full flex flex-col items-stretch bg-purple-500">
         <div
             class="text-white flex justify-between items-center mb-2 bg-purple-600"
         >

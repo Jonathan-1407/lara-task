@@ -5656,6 +5656,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _graphql_CardAdd_gql__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../graphql/CardAdd.gql */ "./resources/js/graphql/CardAdd.gql");
 /* harmony import */ var _graphql_CardAdd_gql__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_graphql_CardAdd_gql__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../graphql/BoardWithListsAndCards.gql */ "./resources/js/graphql/BoardWithListsAndCards.gql");
+/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -5665,6 +5667,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CardAddButton",
@@ -5677,6 +5680,22 @@ __webpack_require__.r(__webpack_exports__);
           order: 1,
           list_id: 1,
           owner_id: 1
+        },
+        update: function update(store, _ref) {
+          var cardAdd = _ref.data.cardAdd;
+          var data = store.readQuery({
+            query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_1___default.a,
+            variables: {
+              id: 1
+            }
+          });
+          data.board.lists.find(function (list) {
+            return list.id = 1;
+          }).cards.push(cardAdd);
+          store.writeQuery({
+            query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_1___default.a,
+            data: data
+          });
         }
       });
     }
@@ -46236,7 +46255,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "h-screen flex flex-col items-stretch bg-purple-500" },
+    {
+      staticClass: "h-screen h-full flex flex-col items-stretch bg-purple-500"
+    },
     [
       _vm._m(0),
       _vm._v(" "),
