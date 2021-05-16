@@ -5723,12 +5723,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CardEditor",
   data: function data() {
     return {
       title: ""
     };
+  },
+  mounted: function mounted() {
+    this.$refs.card.focus();
   }
 });
 
@@ -5766,6 +5772,11 @@ __webpack_require__.r(__webpack_exports__);
   name: "CardList",
   props: {
     list: Object
+  },
+  data: function data() {
+    return {
+      editing: false
+    };
   },
   components: {
     Card: _components_board_Card__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -46219,7 +46230,11 @@ var render = function() {
     {
       staticClass:
         "rounded-sm p-2 text-gray-600 cursor-pointer hover:bg-gray-400 hover:text-gray-800 text-sm",
-      on: { click: _vm.addCard }
+      on: {
+        click: function($event) {
+          return _vm.$emit("click")
+        }
+      }
     },
     [_vm._v("\n    Add new card\n")]
   )
@@ -46256,11 +46271,32 @@ var render = function() {
           expression: "title"
         }
       ],
+      ref: "card",
       staticClass:
         "rounded-md py-1 px-2 outline-none w-full text-gray-900 text-sm bg-white h-16 resize-none",
       attrs: { placeholder: "Enter a title for this card..." },
       domProps: { value: _vm.title },
       on: {
+        keyup: [
+          function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "esc", 27, $event.key, ["Esc", "Escape"])
+            ) {
+              return null
+            }
+            return _vm.$emit("closed")
+          },
+          function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.$emit("closed")
+          }
+        ],
         input: function($event) {
           if ($event.target.composing) {
             return
@@ -46307,9 +46343,21 @@ var render = function() {
         return _c("Card", { key: card.id, attrs: { card: card } })
       }),
       _vm._v(" "),
-      _c("CardEditor"),
-      _vm._v(" "),
-      _c("CardAddButton")
+      _vm.editing
+        ? _c("CardEditor", {
+            on: {
+              closed: function($event) {
+                _vm.editing = false
+              }
+            }
+          })
+        : _c("CardAddButton", {
+            on: {
+              click: function($event) {
+                _vm.editing = true
+              }
+            }
+          })
     ],
     2
   )
