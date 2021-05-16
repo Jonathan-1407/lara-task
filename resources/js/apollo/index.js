@@ -5,7 +5,7 @@ import VueApollo from "vue-apollo";
 Vue.use(VueApollo);
 
 const apolloClient = new ApolloClient({
-    uri: "http://lara-task.test"
+    uri: "http://lara-task.test/graphql"
 });
 
 export default new VueApollo({

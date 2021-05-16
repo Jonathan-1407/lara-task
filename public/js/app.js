@@ -5637,7 +5637,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Card"
+  name: "Card",
+  props: {
+    card: Object
+  }
 });
 
 /***/ }),
@@ -5688,12 +5691,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CardList",
+  props: {
+    list: Object
+  },
   components: {
     Card: _components_board_Card__WEBPACK_IMPORTED_MODULE_0__["default"],
     CardAddButton: _components_board_CardAddButton__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -5711,7 +5715,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_board_CardList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/board/CardList */ "./resources/js/components/board/CardList.vue");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/lib/index.js");
+/* harmony import */ var _components_board_CardList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/board/CardList */ "./resources/js/components/board/CardList.vue");
+var _templateObject;
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5737,10 +5754,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Board",
   components: {
-    CardList: _components_board_CardList__WEBPACK_IMPORTED_MODULE_0__["default"]
+    CardList: _components_board_CardList__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  apollo: {
+    board: {
+      query: Object(graphql_tag__WEBPACK_IMPORTED_MODULE_0__["default"])(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n                query($id: ID!) {\n                    board(id: $id) {\n                        title\n                        color\n                        lists {\n                            id\n                            title\n                            cards {\n                                id\n                                title\n                                order\n                            }\n                        }\n                    }\n                }\n            "]))),
+      variables: {
+        id: 1
+      }
+    }
   }
 });
 
@@ -46094,7 +46120,7 @@ var render = function() {
       staticClass:
         "bg-white card rounded-sm p-2 cursor-pointer text-sm hover:bg-gray-100 mb-2"
     },
-    [_vm._v("\n    xxx\n")]
+    [_vm._v("\n    " + _vm._s(_vm.card.title) + "\n")]
   )
 }
 var staticRenderFns = []
@@ -46154,31 +46180,22 @@ var render = function() {
     "div",
     { staticClass: "bg-gray-300 rounded-sm p-2 mr-2 list" },
     [
-      _vm._m(0),
+      _c("div", { staticClass: "flex justify-between" }, [
+        _c("div", { staticClass: "text-gray-800 pl-2 pb-2 font-bold" }, [
+          _vm._v("\n            " + _vm._s(_vm.list.title) + "\n        ")
+        ])
+      ]),
       _vm._v(" "),
-      _c("Card"),
-      _vm._v(" "),
-      _c("Card"),
-      _vm._v(" "),
-      _c("Card"),
+      _vm._l(_vm.list.cards, function(card) {
+        return _c("Card", { key: card.id, attrs: { card: card } })
+      }),
       _vm._v(" "),
       _c("CardAddButton")
     ],
-    1
+    2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex justify-between" }, [
-      _c("div", { staticClass: "text-gray-800 pl-2 pb-2 font-bold" }, [
-        _vm._v("\n            HOLA\n        ")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -46206,24 +46223,36 @@ var render = function() {
     [
       _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "h-full flex flex-1 flex-col items-stretch" }, [
-        _c("div", { staticClass: "mx-4 mb-2 text-white font-bold text-lg" }, [
-          _vm._v("\n            Title here\n        ")
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "flex flex-1 items-start overflow-x-auto mx-2" },
-          [
-            _c("CardList"),
-            _vm._v(" "),
-            _c("CardList"),
-            _vm._v(" "),
-            _c("CardList")
-          ],
-          1
-        )
-      ])
+      _vm.$apollo.queries.board.loading
+        ? _c(
+            "div",
+            { staticClass: "h-full flex flex-1 flex-col items-stretch" },
+            [_c("span", { staticClass: "text-white" }, [_vm._v("Loading...")])]
+          )
+        : _c(
+            "div",
+            { staticClass: "h-full flex flex-1 flex-col items-stretch" },
+            [
+              _c(
+                "div",
+                { staticClass: "mx-4 mb-2 text-white font-bold text-lg" },
+                [
+                  _vm._v(
+                    "\n            " + _vm._s(_vm.board.title) + "\n        "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "flex flex-1 items-start overflow-x-auto mx-2" },
+                _vm._l(_vm.board.lists, function(list) {
+                  return _c("CardList", { key: list.id, attrs: { list: list } })
+                }),
+                1
+              )
+            ]
+          )
     ]
   )
 }
@@ -59147,7 +59176,7 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_apollo__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var apolloClient = new apollo_boost__WEBPACK_IMPORTED_MODULE_1__["default"]({
-  uri: "http://lara-task.test"
+  uri: "http://lara-task.test/graphql"
 });
 /* harmony default export */ __webpack_exports__["default"] = (new vue_apollo__WEBPACK_IMPORTED_MODULE_2__["default"]({
   defaultClient: apolloClient
@@ -59167,17 +59196,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _views_Board__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/Board */ "./resources/js/views/Board.vue");
-/* harmony import */ var _apollo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./apollo */ "./resources/js/apollo/index.js");
+/* harmony import */ var _apollo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./apollo */ "./resources/js/apollo/index.js");
+/* harmony import */ var _views_Board__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/Board */ "./resources/js/views/Board.vue");
 
 
 
 
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_1___default.a;
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("board", _views_Board__WEBPACK_IMPORTED_MODULE_2__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("board", _views_Board__WEBPACK_IMPORTED_MODULE_3__["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
   el: "#app",
-  apolloProvider: _apollo__WEBPACK_IMPORTED_MODULE_3__["default"]
+  apolloProvider: _apollo__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 
 /***/ }),
