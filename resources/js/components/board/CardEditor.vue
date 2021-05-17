@@ -14,7 +14,7 @@
                 class="rounded-sm py-1 px-3 bg-indigo-700 text-white cursor-pointer hover:bg-indigo-600 outline-none"
                 @click="addCard"
             >
-                Addd Card
+                Add Card
             </button>
             <button
                 class="py-1 px-3 ml-1 rounded-md hover:bg-gray-400 cursor-pointer text-gray-500"
@@ -57,16 +57,16 @@ export default {
                     });
 
                     data.board.lists
-                        .find(list => (list.id == self.list.id))
+                        .find(list => list.id == self.list.id)
                         .cards.push(cardAdd);
 
                     store.writeQuery({ query: BoardQuery, data });
                 }
             });
-            this.close()
+            this.close();
         },
         close: function() {
-            this.$emit('closed');
+            this.$emit("closed");
         }
     },
     mounted: function() {
