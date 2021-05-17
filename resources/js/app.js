@@ -1,13 +1,12 @@
 import "./bootstrap";
 import Vue from "vue";
 import apolloProvider from "./apollo";
-import Board from "./views/Board";
+import router from "./router";
 
 window.Vue = Vue;
 
-Vue.component("board", Board);
-
 const app = new Vue({
     el: "#app",
-    apolloProvider
+    apolloProvider,
+    router
 });
