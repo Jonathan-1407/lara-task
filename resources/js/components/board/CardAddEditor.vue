@@ -1,11 +1,16 @@
 <template>
-    <CardEditor v-model="title" @closed="close" @saved="addCard"></CardEditor>
+    <CardEditor
+        v-model="title"
+        @closed="close"
+        @saved="addCard"
+        label="Add Card"
+    ></CardEditor>
 </template>
 
 <script>
 import CardAdd from "../../graphql/CardAdd.gql";
 import BoardQuery from "../../graphql/BoardWithListsAndCards.gql";
-import { EVENT_CARD_ADDED } from "../../other/constants"
+import { EVENT_CARD_ADDED } from "../../other/constants";
 import CardEditor from "./CardEditor";
 
 export default {
@@ -44,6 +49,6 @@ export default {
         close: function() {
             this.$emit("closed");
         }
-    },
+    }
 };
 </script>

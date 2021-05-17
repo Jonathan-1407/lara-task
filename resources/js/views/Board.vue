@@ -25,6 +25,7 @@
                     :key="list.id"
                     :list="list"
                     @card-added="updateQueryCache($event)"
+                    @card-updated="updateQueryCache($event)"
                     @card-deleted="updateQueryCache($event)"
                 ></CardList>
             </div>
@@ -36,7 +37,11 @@
 import gql from "graphql-tag";
 import CardList from "../components/board/CardList";
 import BoardQuery from "../graphql/BoardWithListsAndCards.gql";
-import { EVENT_CARD_ADDED, EVENT_CARD_DELETED } from "../other/constants";
+import {
+    EVENT_CARD_ADDED,
+    EVENT_CARD_UPDATED,
+    EVENT_CARD_DELETED
+} from "../other/constants";
 
 export default {
     name: "Board",
@@ -54,21 +59,28 @@ export default {
     methods: {
         updateQueryCache: function(event) {
             let self = this;
-            
+
             const data = event.store.readQuery({
                 query: BoardQuery,
                 variables: { id: Number(self.board.id) }
             });
 
-            const listById = () => data.board.lists.find(list => list.id == event.list_id)
+            const listById = () =>
+                data.board.lists.find(list => list.id == event.list_id);
             switch (event.type) {
                 case EVENT_CARD_ADDED:
-
-            data.board.lists
+                    data.board.lists;
                     listById().cards.push(event.data);
                     break;
+                case EVENT_CARD_UPDATED:
+                    listById().cards.filter(
+                        card => card.id == event.data.id
+                    ).title = event.data.title;
+                    break;
                 case EVENT_CARD_DELETED:
-                    listById().cards = listById().cards.filter(card => card.id != event.data.id)
+                    listById().cards = listById().cards.filter(
+                        card => card.id != event.data.id
+                    );
                     break;
             }
 

@@ -15,7 +15,7 @@
                 class="rounded-sm py-1 px-3 bg-indigo-700 text-white cursor-pointer hover:bg-indigo-600 outline-none"
                 @click="saved"
             >
-                Add Card
+                {{ label }}
             </button>
             <button
                 class="py-1 px-3 ml-1 rounded-md hover:bg-gray-400 cursor-pointer text-gray-500"
@@ -34,7 +34,7 @@ import { EVENT_CARD_ADDED } from "../../other/constants";
 
 export default {
     name: "CardEditor",
-    props: ["value"],
+    props: ["value", "label"],
     methods: {
         close: function() {
             this.$emit("closed");

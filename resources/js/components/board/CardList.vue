@@ -10,6 +10,7 @@
             :key="card.id"
             :card="card"
             @deleted="$emit('card-deleted', { ...$event, list_id: list.id })"
+            @updated="$emit('card-updated', { ...$event, list_id: list.id })"
         ></Card>
         <CardAddEditor
             v-if="editing"
