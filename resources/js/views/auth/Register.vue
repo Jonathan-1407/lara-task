@@ -4,12 +4,10 @@
             <div class="text-3xl text-blue-700 font-bold mb-10">
                 <span>Lara Task</span>
             </div>
-
             <div class="w-full sm:shadow-xl sm:bg-white sm:py-8 sm:px-12">
                 <div class="w-full text-center text-gray-600 font-bold mb-8">
-                    Log in
+                    Sign up
                 </div>
-
                 <form action="">
                     <div class="w-full mb-4">
                         <input
@@ -22,7 +20,17 @@
                             placeholder="Enter email"
                         />
                     </div>
-
+                    <div class="w-full mb-4">
+                        <input
+                            type="text"
+                            class="
+                                rounded-sm px-4 py-2 
+                                outline-none focus:online-none 
+                                border-gray-300 bg-gray-100 
+                                border-solid border-2 w-full text-sm"
+                            placeholder="Enter your name"
+                        />
+                    </div>
                     <div class="w-full mb-4">
                         <input
                             type="password"
@@ -34,14 +42,13 @@
                             placeholder="Enter password"
                         />
                     </div>
-
                     <div class="w-full mb-6">
                         <button
                             type="submit"
                             class="
                                 w-full rounded-sm px-4 py-2 
                                 text-white
-                                text-sam bg-blue-500 font-bold 
+                                text-sam bg-green-500 font-bold 
                                 outline-none focus:outline-none 
                                 hover:bg-opacity-75 disabled:opacity-25"
                         >
@@ -53,9 +60,9 @@
                 <div class="text-center text-sm">
                     <router-link
                         class="text-blue-600 hover:outline"
-                        :to="{ name: 'Register' }"
+                        :to="{ name: 'Login' }"
                     >
-                        Sign up for an account
+                        Already have an account? Log in
                     </router-link>
                 </div>
             </div>
