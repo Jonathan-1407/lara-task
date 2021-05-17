@@ -63253,7 +63253,11 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_apollo__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var apolloClient = new apollo_boost__WEBPACK_IMPORTED_MODULE_1__["default"]({
-  uri: "http://lara-task.test/graphql"
+  uri: "http://lara-task.test/graphql",
+  headers: {
+    "X-CSRF-TOKEN": document.querySelector("meta[name='csrf-token']").content
+  },
+  credentials: "include"
 });
 /* harmony default export */ __webpack_exports__["default"] = (new vue_apollo__WEBPACK_IMPORTED_MODULE_2__["default"]({
   defaultClient: apolloClient
