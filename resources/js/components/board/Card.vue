@@ -11,7 +11,7 @@
             <div class="text-gray-400 pr-2 hover:text-yellow-700">
                 <span class="fa fa-pencil"></span>
             </div>
-            <div class="text-gray-400 hover:text-red-700">
+            <div class="text-gray-400 hover:text-red-700" @click="cardDelete">
                 <span class="fa fa-trash"></span>
             </div>
         </div>
@@ -21,6 +21,7 @@
 <script>
 import BoardQuery from "../../graphql/BoardWithListsAndCards.gql";
 import CardDelete from "../../graphql/CardDelete.gql";
+import { EVENT_CARD_DELETED } from "../../other/constants"
 
 export default {
     name: "Card",
@@ -35,6 +36,13 @@ export default {
                 mutation: CardDelete,
                 variables: {
                     id: self.card.id
+                },
+                update: function(store, { data: { cardDelete } }) {
+                    self.$emit("deleted", {
+                        store,
+                        data: cardDelete,
+                        type: EVENT_CARD_DELETED
+                    });
                 }
             });
             this.close();

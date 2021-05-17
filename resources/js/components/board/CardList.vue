@@ -5,7 +5,12 @@
                 {{ list.title }}
             </div>
         </div>
-        <Card v-for="card in list.cards" :key="card.id" :card="card"></Card>
+        <Card
+            v-for="card in list.cards"
+            :key="card.id"
+            :card="card"
+            @deleted="$emit('card-deleted', { ...$event, list_id: list.id })"
+        ></Card>
         <CardEditor
             v-if="editing"
             @closed="editing = false"
