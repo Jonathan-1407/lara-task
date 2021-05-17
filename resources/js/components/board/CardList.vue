@@ -11,12 +11,12 @@
             :card="card"
             @deleted="$emit('card-deleted', { ...$event, list_id: list.id })"
         ></Card>
-        <CardEditor
+        <CardAddEditor
             v-if="editing"
             @closed="editing = false"
             :list="list"
             @added="$emit('card-added', { ...$event, list_id: list.id })"
-        ></CardEditor>
+        ></CardAddEditor>
         <CardAddButton v-else @click="editing = true"></CardAddButton>
     </div>
 </template>
@@ -24,7 +24,7 @@
 <script>
 import Card from "../../components/board/Card";
 import CardAddButton from "../../components/board/CardAddButton";
-import CardEditor from "../../components/board/CardEditor";
+import CardAddEditor from "../../components/board/CardAddEditor";
 
 export default {
     name: "CardList",
@@ -37,7 +37,7 @@ export default {
     components: {
         Card,
         CardAddButton,
-        CardEditor
+        CardAddEditor
     }
 };
 </script>
