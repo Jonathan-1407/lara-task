@@ -9,5 +9,6 @@ mutation CardAdd($title: String!, $order: Int!, $list_id: ID!, $owner_id: ID!) {
     ) {
         id
         title
+        order
     }
 }
