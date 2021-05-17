@@ -24,6 +24,7 @@
                     v-for="list in board.lists"
                     :key="list.id"
                     :list="list"
+                    @card-added="updateQueryCache($event)"
                 ></CardList>
             </div>
         </div>
@@ -46,6 +47,22 @@ export default {
             variables: {
                 id: 1
             }
+        }
+    },
+    methods: {
+        updateQueryCache: function(event) {
+            let self = this;
+
+            const data = event.store.readQuery({
+                query: BoardQuery,
+                variables: { id: Number(self.board.id) }
+            });
+
+            data.board.lists
+                .find(list => list.id == event.list_id)
+                .cards.push(event.data);
+
+            event.store.writeQuery({ query: BoardQuery, data });
         }
     }
 };

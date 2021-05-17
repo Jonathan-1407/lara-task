@@ -19,10 +19,29 @@
 </template>
 
 <script>
+import BoardQuery from "../../graphql/BoardWithListsAndCards.gql";
+import CardDelete from "../../graphql/CardDelete.gql";
+
 export default {
     name: "Card",
     props: {
         card: Object
+    },
+    methods: {
+        cardDelete: function() {
+            let self = this;
+
+            self.$apollo.mutate({
+                mutation: CardDelete,
+                variables: {
+                    id: self.card.id
+                }
+            });
+            this.close();
+        },
+        close: function() {
+            this.$emit("closed");
+        }
     }
 };
 </script>

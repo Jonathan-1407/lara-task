@@ -51,19 +51,13 @@ export default {
                     owner_id: 1
                 },
                 update: function(store, { data: { cardAdd } }) {
-                    const data = store.readQuery({
-                        query: BoardQuery,
-                        variables: { id: Number(self.list.board_id) }
+                    self.$emit("added", {
+                        store,
+                        data: cardAdd
                     });
-
-                    data.board.lists
-                        .find(list => list.id == self.list.id)
-                        .cards.push(cardAdd);
-
-                    store.writeQuery({ query: BoardQuery, data });
+                    self.close();
                 }
             });
-            this.close();
         },
         close: function() {
             this.$emit("closed");
