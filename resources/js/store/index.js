@@ -15,21 +15,21 @@ const store = {
         }
     },
     mutations: {
-        SET_LOGGED_IN: function(state, payload) {
+        SET_LOGGED_IN: function (state, payload) {
             state.loggedIn = Boolean(payload);
         },
-        SET_USER: function(state, payload) {
+        SET_USER: function (state, payload) {
             state.user = payload;
         }
     },
     actions: {
-        setLoggedIn: async function({ commit }, payload) {
+        setLoggedIn: async function ({commit}, payload) {
             const isLoggedIn = Boolean(payload);
 
             localStorage.setItem("isLoggedIn", isLoggedIn);
             commit("SET_LOGGED_IN", isLoggedIn);
         },
-        fetchCurrentUser: async function({ commit, dispatch }) {
+        fetchCurrentUser: async function ({commit, dispatch}) {
             const result = await apollo.defaultClient.query({
                 query: Me,
                 fetchPolicy: "no-cache"
@@ -41,13 +41,14 @@ const store = {
                 commit("SET_USER", user);
                 dispatch("SET_LOGGED_IN", true);
             } else {
-                commit("SET_USER", { id: null, name: null, email: null });
+                commit("SET_USER", {id: null, name: null, email: null});
                 dispatch("SET_LOGGED_IN", false);
             }
         }
     },
     getters: {
-        isLoggedIn: state => state.loggedIn
+        isLoggedIn: state => state.loggedIn,
+        currentUser: state => state.user
     }
 };
 

@@ -8,7 +8,8 @@
                 Lara Task
             </div>
             <div class="mr-2 w-1/3 flex justify-end">
-                <div v-if="isLoggedIn">
+                <div v-if="isLoggedIn" class="flex flex-wrap content-start">
+                    <div class="text-sm mr-2 m-auto">{{ currentUser.name }}</div>
                     <button class="header-btn">Logout</button>
                 </div>
                 <div v-else>
@@ -70,7 +71,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["isLoggedIn"])
+        ...mapGetters(["isLoggedIn", "currentUser"])
     },
     methods: {
         updateQueryCache: function(event) {

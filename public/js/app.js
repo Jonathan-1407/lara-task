@@ -6040,6 +6040,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -6058,7 +6059,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["isLoggedIn"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["isLoggedIn", "currentUser"])),
   methods: {
     updateQueryCache: function updateQueryCache(event) {
       var self = this;
@@ -47985,7 +47986,11 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "mr-2 w-1/3 flex justify-end" }, [
             _vm.isLoggedIn
-              ? _c("div", [
+              ? _c("div", { staticClass: "flex flex-wrap content-start" }, [
+                  _c("div", { staticClass: "text-sm mr-2 m-auto" }, [
+                    _vm._v(_vm._s(_vm.currentUser.name))
+                  ]),
+                  _vm._v(" "),
                   _c("button", { staticClass: "header-btn" }, [
                     _vm._v("Logout")
                   ])
@@ -67266,6 +67271,9 @@ var store = {
   getters: {
     isLoggedIn: function isLoggedIn(state) {
       return state.loggedIn;
+    },
+    currentUser: function currentUser(state) {
+      return state.user;
     }
   }
 };
