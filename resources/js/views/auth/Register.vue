@@ -5,21 +5,18 @@
                 <span>Lara Task</span>
             </div>
             <div class="w-full sm:shadow-xl sm:bg-white sm:py-8 sm:px-12">
+                <div
+                    v-if="errors.length"
+                    class="p-2 bg-red-600 text-gray-100 rounded-sm mb-6 text-sm text-center"
+                >
+                    <div v-for="(error, index) in errors" :key="index">
+                        {{ error.message }}
+                    </div>
+                </div>
                 <div class="w-full text-center text-gray-600 font-bold mb-8">
                     Sign up
                 </div>
-                <form action="">
-                    <div class="w-full mb-4">
-                        <input
-                            type="text"
-                            class="
-                                rounded-sm px-4 py-2 
-                                outline-none focus:online-none 
-                                border-gray-300 bg-gray-100 
-                                border-solid border-2 w-full text-sm"
-                            placeholder="Enter email"
-                        />
-                    </div>
+                <form @submit.prevent="register">
                     <div class="w-full mb-4">
                         <input
                             type="text"
@@ -29,8 +26,22 @@
                                 border-gray-300 bg-gray-100 
                                 border-solid border-2 w-full text-sm"
                             placeholder="Enter your name"
+                            v-model="name"
                         />
                     </div>
+                    <div class="w-full mb-4">
+                        <input
+                            type="email"
+                            class="
+                                rounded-sm px-4 py-2 
+                                outline-none focus:online-none 
+                                border-gray-300 bg-gray-100 
+                                border-solid border-2 w-full text-sm"
+                            placeholder="Enter email"
+                            v-model="email"
+                        />
+                    </div>
+
                     <div class="w-full mb-4">
                         <input
                             type="password"
@@ -40,6 +51,7 @@
                                 border-gray-300 bg-gray-100 
                                 border-solid border-2 w-full text-sm"
                             placeholder="Enter password"
+                            v-model="password"
                         />
                     </div>
                     <div class="w-full mb-6">
@@ -52,7 +64,7 @@
                                 outline-none focus:outline-none 
                                 hover:bg-opacity-75 disabled:opacity-25"
                         >
-                            Login
+                            Register
                         </button>
                     </div>
                 </form>
@@ -71,8 +83,37 @@
 </template>
 
 <script>
+import Register from "../../graphql/auth/Register.gql";
+import { gqlErrors } from "../../other/utils.js";
+
 export default {
-    name: "Login"
+    name: "Login",
+    data: () => ({
+        email: "",
+        name: "",
+        password: "",
+        errors: []
+    }),
+    methods: {
+        register: async function() {
+            let self = this;
+
+            self.errors = [];
+
+            try {
+                await self.$apollo.mutate({
+                    mutation: Register,
+                    variables: {
+                        email: self.email,
+                        name: self.name,
+                        password: self.password
+                    }
+                });
+            } catch (err) {
+                self.errors = gqlErrors(err);
+            }
+        }
+    }
 };
 </script>
 
