@@ -11,6 +11,9 @@ query($id: ID!) {
                 id
                 title
                 order
+                owner {
+                    id
+                }
             }
         }
     }

@@ -83,6 +83,7 @@
 </template>
 
 <script>
+import { mapActions, mapMutations } from "vuex";
 import Register from "../../graphql/auth/Register.gql";
 import { gqlErrors } from "../../other/utils.js";
 
@@ -95,13 +96,17 @@ export default {
         errors: []
     }),
     methods: {
+        ...mapActions(["setLoggedIn"]),
+        ...mapMutations({
+            setUser: "SET_USER"
+        }),
         register: async function() {
             let self = this;
 
             self.errors = [];
 
             try {
-                await self.$apollo.mutate({
+                const response = await self.$apollo.mutate({
                     mutation: Register,
                     variables: {
                         email: self.email,
@@ -109,11 +114,16 @@ export default {
                         password: self.password
                     }
                 });
+                const user = response.data?.register;
+
+                if (user) {
+                    self.setLoggedIn(true);
+                    self.setUser(user);
+                    self.$router.push({ name: "Board" });
+                }
             } catch (err) {
                 self.errors = gqlErrors(err);
             }
-
-            self.$router.push({ name: "Board" });
         }
     }
 };

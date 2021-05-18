@@ -9,6 +9,7 @@
             </div>
             <div
                 class="flex font-bold opacity-0 group-hover:opacity-100 transition-opacity ease-out duration-500"
+                v-if="card.owner.id == currentUser.id"
             >
                 <div
                     class="text-gray-400 pr-2 hover:text-yellow-700"
@@ -36,6 +37,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import BoardQuery from "../../graphql/BoardWithListsAndCards.gql";
 import CardDelete from "../../graphql/CardDelete.gql";
 import CardUpdate from "../../graphql/CardUpdate.gql";
@@ -54,6 +56,9 @@ export default {
         editing: false,
         title: ""
     }),
+    computed: {
+        ...mapGetters(["currentUser"])
+    },
     methods: {
         cardDelete: function() {
             let self = this;
