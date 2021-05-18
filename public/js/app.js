@@ -5981,12 +5981,22 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/lib/index.js");
-/* harmony import */ var _components_board_CardList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/board/CardList */ "./resources/js/components/board/CardList.vue");
-/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../graphql/BoardWithListsAndCards.gql */ "./resources/js/graphql/BoardWithListsAndCards.gql");
-/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _other_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../other/constants */ "./resources/js/other/constants.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/lib/index.js");
+/* harmony import */ var _components_board_CardList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/board/CardList */ "./resources/js/components/board/CardList.vue");
+/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../graphql/BoardWithListsAndCards.gql */ "./resources/js/graphql/BoardWithListsAndCards.gql");
+/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../graphql/auth/Logout.gql */ "./resources/js/graphql/auth/Logout.gql");
+/* harmony import */ var _graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _other_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../other/constants */ "./resources/js/other/constants.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -6041,6 +6051,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -6049,22 +6064,58 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Board",
   components: {
-    CardList: _components_board_CardList__WEBPACK_IMPORTED_MODULE_2__["default"]
+    CardList: _components_board_CardList__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   apollo: {
     board: {
-      query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3___default.a,
+      query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_4___default.a,
       variables: {
         id: 1
       }
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["isLoggedIn", "currentUser"])),
-  methods: {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["isLoggedIn", "currentUser"])),
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["logout"])), {}, {
+    _logout: function () {
+      var _logout2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _response$data, _response$data$logout;
+
+        var self, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                self = this;
+                _context.next = 3;
+                return self.$apollo.mutate({
+                  mutation: _graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_5___default.a
+                });
+
+              case 3:
+                response = _context.sent;
+
+                if ((_response$data = response.data) !== null && _response$data !== void 0 && (_response$data$logout = _response$data.logout) !== null && _response$data$logout !== void 0 && _response$data$logout.id) {
+                  self.logout();
+                }
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function _logout() {
+        return _logout2.apply(this, arguments);
+      }
+
+      return _logout;
+    }(),
     updateQueryCache: function updateQueryCache(event) {
       var self = this;
       var data = event.store.readQuery({
-        query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3___default.a,
+        query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_4___default.a,
         variables: {
           id: Number(self.board.id)
         }
@@ -6077,18 +6128,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
 
       switch (event.type) {
-        case _other_constants__WEBPACK_IMPORTED_MODULE_4__["EVENT_CARD_ADDED"]:
+        case _other_constants__WEBPACK_IMPORTED_MODULE_6__["EVENT_CARD_ADDED"]:
           data.board.lists;
           listById().cards.push(event.data);
           break;
 
-        case _other_constants__WEBPACK_IMPORTED_MODULE_4__["EVENT_CARD_UPDATED"]:
+        case _other_constants__WEBPACK_IMPORTED_MODULE_6__["EVENT_CARD_UPDATED"]:
           listById().cards.filter(function (card) {
             return card.id == event.data.id;
           }).title = event.data.title;
           break;
 
-        case _other_constants__WEBPACK_IMPORTED_MODULE_4__["EVENT_CARD_DELETED"]:
+        case _other_constants__WEBPACK_IMPORTED_MODULE_6__["EVENT_CARD_DELETED"]:
           listById().cards = listById().cards.filter(function (card) {
             return card.id != event.data.id;
           });
@@ -6096,11 +6147,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       event.store.writeQuery({
-        query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3___default.a,
+        query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_4___default.a,
         data: data
       });
     }
-  }
+  })
 });
 
 /***/ }),
@@ -47988,15 +48039,29 @@ var render = function() {
             _vm.isLoggedIn
               ? _c("div", { staticClass: "flex flex-wrap content-start" }, [
                   _c("div", { staticClass: "text-sm mr-2 m-auto" }, [
-                    _vm._v(_vm._s(_vm.currentUser.name))
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.currentUser.name) +
+                        "\n                "
+                    )
                   ]),
                   _vm._v(" "),
-                  _c("button", { staticClass: "header-btn" }, [
-                    _vm._v("Logout")
-                  ])
+                  _c(
+                    "button",
+                    {
+                      staticClass: "header-btn",
+                      on: {
+                        click: function($event) {
+                          return _vm._logout()
+                        }
+                      }
+                    },
+                    [_vm._v("\n                    Logout\n                ")]
+                  )
                 ])
               : _c(
                   "div",
+                  { staticClass: "flex flex-wrap content-start" },
                   [
                     _c(
                       "router-link",
@@ -66770,6 +66835,139 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/graphql/auth/Logout.gql":
+/*!**********************************************!*\
+  !*** ./resources/js/graphql/auth/Logout.gql ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Logout"},"variableDefinitions":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logout"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]}]}}]}}],"loc":{"start":0,"end":50}};
+    doc.loc.source = {"body":"mutation Logout {\n    logout {\n        id\n    }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
+  
+
+    var names = {};
+    function unique(defs) {
+      return defs.filter(
+        function(def) {
+          if (def.kind !== 'FragmentDefinition') return true;
+          var name = def.name.value
+          if (names[name]) {
+            return false;
+          } else {
+            names[name] = true;
+            return true;
+          }
+        }
+      )
+    }
+  
+
+    // Collect any fragment/type references from a node, adding them to the refs Set
+    function collectFragmentReferences(node, refs) {
+      if (node.kind === "FragmentSpread") {
+        refs.add(node.name.value);
+      } else if (node.kind === "VariableDefinition") {
+        var type = node.type;
+        if (type.kind === "NamedType") {
+          refs.add(type.name.value);
+        }
+      }
+
+      if (node.selectionSet) {
+        node.selectionSet.selections.forEach(function(selection) {
+          collectFragmentReferences(selection, refs);
+        });
+      }
+
+      if (node.variableDefinitions) {
+        node.variableDefinitions.forEach(function(def) {
+          collectFragmentReferences(def, refs);
+        });
+      }
+
+      if (node.definitions) {
+        node.definitions.forEach(function(def) {
+          collectFragmentReferences(def, refs);
+        });
+      }
+    }
+
+    var definitionRefs = {};
+    (function extractReferences() {
+      doc.definitions.forEach(function(def) {
+        if (def.name) {
+          var refs = new Set();
+          collectFragmentReferences(def, refs);
+          definitionRefs[def.name.value] = refs;
+        }
+      });
+    })();
+
+    function findOperation(doc, name) {
+      for (var i = 0; i < doc.definitions.length; i++) {
+        var element = doc.definitions[i];
+        if (element.name && element.name.value == name) {
+          return element;
+        }
+      }
+    }
+
+    function oneQuery(doc, operationName) {
+      // Copy the DocumentNode, but clear out the definitions
+      var newDoc = {
+        kind: doc.kind,
+        definitions: [findOperation(doc, operationName)]
+      };
+      if (doc.hasOwnProperty("loc")) {
+        newDoc.loc = doc.loc;
+      }
+
+      // Now, for the operation we're running, find any fragments referenced by
+      // it or the fragments it references
+      var opRefs = definitionRefs[operationName] || new Set();
+      var allRefs = new Set();
+      var newRefs = new Set();
+
+      // IE 11 doesn't support "new Set(iterable)", so we add the members of opRefs to newRefs one by one
+      opRefs.forEach(function(refName) {
+        newRefs.add(refName);
+      });
+
+      while (newRefs.size > 0) {
+        var prevRefs = newRefs;
+        newRefs = new Set();
+
+        prevRefs.forEach(function(refName) {
+          if (!allRefs.has(refName)) {
+            allRefs.add(refName);
+            var childRefs = definitionRefs[refName] || new Set();
+            childRefs.forEach(function(childRef) {
+              newRefs.add(childRef);
+            });
+          }
+        });
+      }
+
+      allRefs.forEach(function(refName) {
+        var op = findOperation(doc, refName);
+        if (op) {
+          newDoc.definitions.push(op);
+        }
+      });
+
+      return newDoc;
+    }
+    
+    module.exports = doc;
+    
+        module.exports["Logout"] = oneQuery(doc, "Logout");
+        
+
+
+/***/ }),
+
 /***/ "./resources/js/graphql/auth/Me.gql":
 /*!******************************************!*\
   !*** ./resources/js/graphql/auth/Me.gql ***!
@@ -67221,39 +67419,22 @@ var store = {
 
       return setLoggedIn;
     }(),
-    fetchCurrentUser: function () {
-      var _fetchCurrentUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref2) {
-        var _result$data;
-
-        var commit, dispatch, result, user;
+    logout: function () {
+      var _logout = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref2) {
+        var commit, dispatch;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 commit = _ref2.commit, dispatch = _ref2.dispatch;
-                _context2.next = 3;
-                return _apollo__WEBPACK_IMPORTED_MODULE_3__["default"].defaultClient.query({
-                  query: _graphql_auth_Me_gql__WEBPACK_IMPORTED_MODULE_4___default.a,
-                  fetchPolicy: "no-cache"
+                commit("SET_USER", {
+                  id: null,
+                  name: null,
+                  email: null
                 });
+                dispatch("setLoggedIn", false);
 
               case 3:
-                result = _context2.sent;
-                user = (_result$data = result.data) === null || _result$data === void 0 ? void 0 : _result$data.me;
-
-                if (user) {
-                  commit("SET_USER", user);
-                  dispatch("SET_LOGGED_IN", true);
-                } else {
-                  commit("SET_USER", {
-                    id: null,
-                    name: null,
-                    email: null
-                  });
-                  dispatch("SET_LOGGED_IN", false);
-                }
-
-              case 6:
               case "end":
                 return _context2.stop();
             }
@@ -67261,7 +67442,48 @@ var store = {
         }, _callee2);
       }));
 
-      function fetchCurrentUser(_x3) {
+      function logout(_x3) {
+        return _logout.apply(this, arguments);
+      }
+
+      return logout;
+    }(),
+    fetchCurrentUser: function () {
+      var _fetchCurrentUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(_ref3) {
+        var _result$data;
+
+        var commit, dispatch, result, user;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                commit = _ref3.commit, dispatch = _ref3.dispatch;
+                _context3.next = 3;
+                return _apollo__WEBPACK_IMPORTED_MODULE_3__["default"].defaultClient.query({
+                  query: _graphql_auth_Me_gql__WEBPACK_IMPORTED_MODULE_4___default.a,
+                  fetchPolicy: "no-cache"
+                });
+
+              case 3:
+                result = _context3.sent;
+                user = (_result$data = result.data) === null || _result$data === void 0 ? void 0 : _result$data.me;
+
+                if (user) {
+                  commit("SET_USER", user);
+                  dispatch("setLoggedIn", true);
+                } else {
+                  dispatch("logout");
+                }
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
+
+      function fetchCurrentUser(_x4) {
         return _fetchCurrentUser.apply(this, arguments);
       }
 

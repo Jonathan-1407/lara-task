@@ -9,10 +9,14 @@
             </div>
             <div class="mr-2 w-1/3 flex justify-end">
                 <div v-if="isLoggedIn" class="flex flex-wrap content-start">
-                    <div class="text-sm mr-2 m-auto">{{ currentUser.name }}</div>
-                    <button class="header-btn">Logout</button>
+                    <div class="text-sm mr-2 m-auto">
+                        {{ currentUser.name }}
+                    </div>
+                    <button class="header-btn" @click="_logout()">
+                        Logout
+                    </button>
                 </div>
-                <div v-else>
+                <div v-else class="flex flex-wrap content-start">
                     <router-link class="header-btn" :to="{ name: 'Login' }">
                         Sign In
                     </router-link>
@@ -47,10 +51,11 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import gql from "graphql-tag";
 import CardList from "../components/board/CardList";
 import BoardQuery from "../graphql/BoardWithListsAndCards.gql";
+import Logout from "../graphql/auth/Logout.gql";
 import {
     EVENT_CARD_ADDED,
     EVENT_CARD_UPDATED,
@@ -74,6 +79,18 @@ export default {
         ...mapGetters(["isLoggedIn", "currentUser"])
     },
     methods: {
+        ...mapActions(["logout"]),
+        _logout: async function() {
+            let self = this;
+
+            const response = await self.$apollo.mutate({
+                mutation: Logout
+            });
+
+            if (response.data?.logout?.id) {
+                self.logout();
+            }
+        },
         updateQueryCache: function(event) {
             let self = this;
 
