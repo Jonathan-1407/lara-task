@@ -6218,9 +6218,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       errors: []
     };
   },
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])({
-    loggedIn: "SET_LOGGED_IN"
-  })), {}, {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["setLoggedIn"])), {}, {
     authenticate: function () {
       var _authenticate = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var self;
@@ -6241,7 +6239,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 });
 
               case 5:
-                self.loggedIn(true);
+                self.setLoggedIn(true);
                 self.$router.push({
                   name: "Board"
                 });
@@ -65700,7 +65698,10 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
   el: "#app",
   apolloProvider: _apollo__WEBPACK_IMPORTED_MODULE_2__["default"],
   router: _router__WEBPACK_IMPORTED_MODULE_3__["default"],
-  store: _store__WEBPACK_IMPORTED_MODULE_4__["default"]
+  store: _store__WEBPACK_IMPORTED_MODULE_4__["default"],
+  beforeCreate: function beforeCreate() {
+    _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch("setLoggedIn", localStorage.getItem("isLoggedIn") === "true");
+  }
 });
 
 /***/ }),
@@ -67033,7 +67034,14 @@ var store = {
       state.loggedIn = Boolean(payload);
     }
   },
-  actions: {},
+  actions: {
+    setLoggedIn: function setLoggedIn(_ref, payload) {
+      var commit = _ref.commit;
+      var isLoggedIn = Boolean(payload);
+      localStorage.setItem("isLoggedIn", isLoggedIn);
+      commit("SET_LOGGED_IN", isLoggedIn);
+    }
+  },
   getters: {
     isLoggedIn: function isLoggedIn(state) {
       return state.loggedIn;

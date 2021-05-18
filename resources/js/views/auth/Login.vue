@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 import Login from "../../graphql/auth/Login.gql";
 import { gqlErrors } from "../../other/utils.js";
 
@@ -86,9 +86,7 @@ export default {
         errors: []
     }),
     methods: {
-        ...mapMutations({
-            loggedIn: "SET_LOGGED_IN"
-        }),
+        ...mapActions(["setLoggedIn"]),
         authenticate: async function() {
             let self = this;
 
@@ -102,7 +100,7 @@ export default {
                         password: self.password
                     }
                 });
-                self.loggedIn(true);
+                self.setLoggedIn(true);
                 self.$router.push({ name: "Board" });
             } catch (err) {
                 self.errors = gqlErrors(err);

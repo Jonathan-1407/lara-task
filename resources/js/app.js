@@ -10,5 +10,11 @@ const app = new Vue({
     el: "#app",
     apolloProvider,
     router,
-    store
+    store,
+    beforeCreate: function() {
+        store.dispatch(
+            "setLoggedIn",
+            localStorage.getItem("isLoggedIn") === "true"
+        );
+    }
 });

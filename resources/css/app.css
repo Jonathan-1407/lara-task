@@ -3,7 +3,7 @@
 
 .header-btn {
     background-color: hsla(0, 0%, 100%, 0.3);
-    @apply rounded-sm px-2 py-1 text-sm font-bold outline-none whitespace-no-wrap;
+    @apply rounded-sm px-2 py-1 m-1 text-sm font-bold outline-none whitespace-no-wrap;
 }
 .header-btn:focus {
     @apply outline-none;

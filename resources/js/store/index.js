@@ -12,7 +12,14 @@ const store = {
             state.loggedIn = Boolean(payload);
         }
     },
-    actions: {},
+    actions: {
+        setLoggedIn: function({ commit }, payload) {
+            const isLoggedIn = Boolean(payload);
+
+            localStorage.setItem("isLoggedIn", isLoggedIn);
+            commit("SET_LOGGED_IN", isLoggedIn);
+        }
+    },
     getters: {
         isLoggedIn: state => state.loggedIn
     }
