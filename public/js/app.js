@@ -6384,6 +6384,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 self.errors = Object(_other_utils_js__WEBPACK_IMPORTED_MODULE_2__["gqlErrors"])(_context.t0);
 
               case 10:
+                self.$router.push({
+                  name: "Board"
+                });
+
+              case 11:
               case "end":
                 return _context.stop();
             }

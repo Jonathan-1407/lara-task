@@ -112,6 +112,8 @@ export default {
             } catch (err) {
                 self.errors = gqlErrors(err);
             }
+
+            self.$router.push({ name: "Board" });
         }
     }
 };
