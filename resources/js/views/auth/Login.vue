@@ -6,6 +6,11 @@
             </div>
 
             <div class="w-full sm:shadow-xl sm:bg-white sm:py-8 sm:px-12">
+                <div
+                    class="p-2 bg-red-600 text-gray-100 rounded-sm mb-6 text-sm text-center"
+                >
+                <div v-for="(error, index) in errors" :key="index">{{ error.message }}</div>
+                </div>
                 <div class="w-full text-center text-gray-600 font-bold mb-8">
                     Log in
                 </div>
@@ -67,24 +72,32 @@
 
 <script>
 import Login from "../../graphql/auth/Login.gql";
+import { gqlErrors } from "../../other/utils.js";
 
 export default {
     name: "Login",
     data: () => ({
         email: "",
-        password: ""
+        password: "",
+        errors: []
     }),
     methods: {
-        authenticate: function() {
+        authenticate: async function() {
             let self = this;
 
-            self.$apollo.mutate({
-                mutation: Login,
-                variables: {
-                    email: self.email,
-                    password: self.password
-                }
-            });
+            self.errors = [];
+
+            try {
+                await self.$apollo.mutate({
+                    mutation: Login,
+                    variables: {
+                        email: self.email,
+                        password: self.password
+                    }
+                });
+            } catch (err) {
+                self.errors = gqlErrors(err);
+            }
         }
     }
 };
