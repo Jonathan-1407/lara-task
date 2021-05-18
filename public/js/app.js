@@ -6028,6 +6028,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -47960,7 +47972,7 @@ var render = function() {
         "div",
         {
           staticClass:
-            "text-white flex justify-between items-center mb-2 bg-purple-600"
+            "text-white flex justify-between items-center mb-4 bg-purple-600"
         },
         [
           _c("div", { staticClass: "ml-2 w-1/3" }, [_vm._v("x")]),
@@ -47974,7 +47986,43 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("div", { staticClass: "mr-2 w-1/3 flex justify-end" }, [
-            _vm._v(_vm._s(_vm.isLoggedIn ? "OK" : "NO :("))
+            _vm.isLoggedIn
+              ? _c("div", [
+                  _c("button", { staticClass: "header-btn" }, [
+                    _vm._v("Logout")
+                  ])
+                ])
+              : _c(
+                  "div",
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "header-btn",
+                        attrs: { to: { name: "Login" } }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    Sign In\n                "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "header-btn",
+                        attrs: { to: { name: "Register" } }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    Sign Up\n                "
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
           ])
         ]
       ),

@@ -1,13 +1,25 @@
 <template>
     <div class="h-screen h-full flex flex-col items-stretch bg-purple-500">
         <div
-            class="text-white flex justify-between items-center mb-2 bg-purple-600"
+            class="text-white flex justify-between items-center mb-4 bg-purple-600"
         >
             <div class="ml-2 w-1/3">x</div>
             <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">
                 Lara Task
             </div>
-            <div class="mr-2 w-1/3 flex justify-end">{{ isLoggedIn ? 'OK' : 'NO :('}}</div>
+            <div class="mr-2 w-1/3 flex justify-end">
+                <div v-if="isLoggedIn">
+                    <button class="header-btn">Logout</button>
+                </div>
+                <div v-else>
+                    <router-link class="header-btn" :to="{ name: 'Login' }">
+                        Sign In
+                    </router-link>
+                    <router-link class="header-btn" :to="{ name: 'Register' }">
+                        Sign Up
+                    </router-link>
+                </div>
+            </div>
         </div>
         <div
             class="h-full flex flex-1 flex-col items-stretch"
