@@ -16,5 +16,6 @@ const app = new Vue({
             "setLoggedIn",
             localStorage.getItem("isLoggedIn") === "true"
         );
+        store.dispatch("fetchCurrentUser");
     }
 });
