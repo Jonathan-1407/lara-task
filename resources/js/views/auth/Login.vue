@@ -10,7 +10,7 @@
                     Log in
                 </div>
 
-                <form action="">
+                <form @submit.prevent="authenticate">
                     <div class="w-full mb-4">
                         <input
                             type="text"
@@ -20,6 +20,7 @@
                                 border-gray-300 bg-gray-100 
                                 border-solid border-2 w-full text-sm"
                             placeholder="Enter email"
+                            v-model="email"
                         />
                     </div>
 
@@ -32,6 +33,7 @@
                                 border-gray-300 bg-gray-100 
                                 border-solid border-2 w-full text-sm"
                             placeholder="Enter password"
+                            v-model="password"
                         />
                     </div>
 
@@ -64,8 +66,27 @@
 </template>
 
 <script>
+import Login from "../../graphql/auth/Login.gql";
+
 export default {
-    name: "Login"
+    name: "Login",
+    data: () => ({
+        email: "",
+        password: ""
+    }),
+    methods: {
+        authenticate: function() {
+            let self = this;
+
+            self.$apollo.mutate({
+                mutation: Login,
+                variables: {
+                    email: self.email,
+                    password: self.password
+                }
+            });
+        }
+    }
 };
 </script>
 
