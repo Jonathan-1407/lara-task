@@ -5981,11 +5981,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/lib/index.js");
-/* harmony import */ var _components_board_CardList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/board/CardList */ "./resources/js/components/board/CardList.vue");
-/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../graphql/BoardWithListsAndCards.gql */ "./resources/js/graphql/BoardWithListsAndCards.gql");
-/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _other_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../other/constants */ "./resources/js/other/constants.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/lib/index.js");
+/* harmony import */ var _components_board_CardList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/board/CardList */ "./resources/js/components/board/CardList.vue");
+/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../graphql/BoardWithListsAndCards.gql */ "./resources/js/graphql/BoardWithListsAndCards.gql");
+/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _other_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../other/constants */ "./resources/js/other/constants.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -6021,6 +6028,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -6028,21 +6036,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Board",
   components: {
-    CardList: _components_board_CardList__WEBPACK_IMPORTED_MODULE_1__["default"]
+    CardList: _components_board_CardList__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   apollo: {
     board: {
-      query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2___default.a,
+      query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3___default.a,
       variables: {
         id: 1
       }
     }
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["isLoggedIn"])),
   methods: {
     updateQueryCache: function updateQueryCache(event) {
       var self = this;
       var data = event.store.readQuery({
-        query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2___default.a,
+        query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3___default.a,
         variables: {
           id: Number(self.board.id)
         }
@@ -6055,18 +6064,18 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       switch (event.type) {
-        case _other_constants__WEBPACK_IMPORTED_MODULE_3__["EVENT_CARD_ADDED"]:
+        case _other_constants__WEBPACK_IMPORTED_MODULE_4__["EVENT_CARD_ADDED"]:
           data.board.lists;
           listById().cards.push(event.data);
           break;
 
-        case _other_constants__WEBPACK_IMPORTED_MODULE_3__["EVENT_CARD_UPDATED"]:
+        case _other_constants__WEBPACK_IMPORTED_MODULE_4__["EVENT_CARD_UPDATED"]:
           listById().cards.filter(function (card) {
             return card.id == event.data.id;
           }).title = event.data.title;
           break;
 
-        case _other_constants__WEBPACK_IMPORTED_MODULE_3__["EVENT_CARD_DELETED"]:
+        case _other_constants__WEBPACK_IMPORTED_MODULE_4__["EVENT_CARD_DELETED"]:
           listById().cards = listById().cards.filter(function (card) {
             return card.id != event.data.id;
           });
@@ -6074,7 +6083,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       event.store.writeQuery({
-        query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2___default.a,
+        query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3___default.a,
         data: data
       });
     }
@@ -6094,15 +6103,22 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _graphql_auth_Login_gql__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../graphql/auth/Login.gql */ "./resources/js/graphql/auth/Login.gql");
-/* harmony import */ var _graphql_auth_Login_gql__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_graphql_auth_Login_gql__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _other_utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../other/utils.js */ "./resources/js/other/utils.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _graphql_auth_Login_gql__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../graphql/auth/Login.gql */ "./resources/js/graphql/auth/Login.gql");
+/* harmony import */ var _graphql_auth_Login_gql__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_graphql_auth_Login_gql__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _other_utils_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../other/utils.js */ "./resources/js/other/utils.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -6178,6 +6194,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6189,7 +6206,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       errors: []
     };
   },
-  methods: {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])({
+    loggedIn: "SET_LOGGED_IN"
+  })), {}, {
     authenticate: function () {
       var _authenticate = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var self;
@@ -6202,7 +6221,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.prev = 2;
                 _context.next = 5;
                 return self.$apollo.mutate({
-                  mutation: _graphql_auth_Login_gql__WEBPACK_IMPORTED_MODULE_1___default.a,
+                  mutation: _graphql_auth_Login_gql__WEBPACK_IMPORTED_MODULE_2___default.a,
                   variables: {
                     email: self.email,
                     password: self.password
@@ -6210,20 +6229,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 5:
-                _context.next = 10;
+                self.loggedIn(true);
+                self.$router.push({
+                  name: "Board"
+                });
+                _context.next = 12;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](2);
-                self.errors = Object(_other_utils_js__WEBPACK_IMPORTED_MODULE_2__["gqlErrors"])(_context.t0);
+                self.errors = Object(_other_utils_js__WEBPACK_IMPORTED_MODULE_3__["gqlErrors"])(_context.t0);
 
-              case 10:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[2, 7]]);
+        }, _callee, this, [[2, 9]]);
       }));
 
       function authenticate() {
@@ -6232,7 +6255,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return authenticate;
     }()
-  }
+  })
 });
 
 /***/ }),
@@ -47933,7 +47956,28 @@ var render = function() {
       staticClass: "h-screen h-full flex flex-col items-stretch bg-purple-500"
     },
     [
-      _vm._m(0),
+      _c(
+        "div",
+        {
+          staticClass:
+            "text-white flex justify-between items-center mb-2 bg-purple-600"
+        },
+        [
+          _c("div", { staticClass: "ml-2 w-1/3" }, [_vm._v("x")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "text-lg opacity-50 cursor-pointer hover:opacity-75"
+            },
+            [_vm._v("\n            Lara Task\n        ")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "mr-2 w-1/3 flex justify-end" }, [
+            _vm._v(_vm._s(_vm.isLoggedIn ? "OK" : "NO :("))
+          ])
+        ]
+      ),
       _vm._v(" "),
       _vm.$apollo.queries.board.loading
         ? _c(
@@ -47982,31 +48026,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "text-white flex justify-between items-center mb-2 bg-purple-600"
-      },
-      [
-        _c("div", { staticClass: "ml-2 w-1/3" }, [_vm._v("x")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "text-lg opacity-50 cursor-pointer hover:opacity-75" },
-          [_vm._v("\n            Lara Task\n        ")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "mr-2 w-1/3 justify-end" })
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -66957,10 +66977,20 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var store = {
-  state: {},
-  mutations: {},
+  state: {
+    loggedIn: false
+  },
+  mutations: {
+    SET_LOGGED_IN: function SET_LOGGED_IN(state, payload) {
+      state.loggedIn = Boolean(payload);
+    }
+  },
   actions: {},
-  getters: {}
+  getters: {
+    isLoggedIn: function isLoggedIn(state) {
+      return state.loggedIn;
+    }
+  }
 };
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store(store));
 
