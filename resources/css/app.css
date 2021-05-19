@@ -13,3 +13,12 @@
 }
 
 @tailwind utilities;
+
+.appear-enter-active, .appear-leave-active {
+    transition: all 100ms ease-in;
+}
+
+.appear-enter, .appear-leave-to {
+    opacity: 0;
+    transform: translateY(20px);
+}

@@ -1,10 +1,12 @@
 <template>
-    <div
-        class="dropdown-menu absolute bg-gray-200 rounded-sm mt-2 text-sm text-gray-600 shadow w-64 overflow-y-auto z-10"
-        v-show="show"
-    >
-        <slot></slot>
-    </div>
+    <transition name="appear">
+        <div
+            class="dropdown-menu absolute bg-gray-200 rounded-sm mt-2 text-sm text-gray-600 shadow w-64 overflow-y-auto z-10"
+            v-show="show"
+        >
+            <slot></slot>
+        </div>
+    </transition>
 </template>
 
 <script>

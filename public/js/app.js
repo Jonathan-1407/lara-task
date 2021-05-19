@@ -6021,6 +6021,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DropdownMenu",
   props: {
@@ -48189,18 +48191,25 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      directives: [
-        { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
-      ],
-      staticClass:
-        "dropdown-menu absolute bg-gray-200 rounded-sm mt-2 text-sm text-gray-600 shadow w-64 overflow-y-auto z-10"
-    },
-    [_vm._t("default")],
-    2
-  )
+  return _c("transition", { attrs: { name: "appear" } }, [
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.show,
+            expression: "show"
+          }
+        ],
+        staticClass:
+          "dropdown-menu absolute bg-gray-200 rounded-sm mt-2 text-sm text-gray-600 shadow w-64 overflow-y-auto z-10"
+      },
+      [_vm._t("default")],
+      2
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
