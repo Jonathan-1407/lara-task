@@ -1,8 +1,6 @@
 <template>
-    <div class="h-screen h-full flex flex-col items-stretch bg-purple-500">
-        <div
-            class="text-white flex justify-between items-center mb-4 bg-purple-600"
-        >
+    <div class="h-screen h-full flex flex-col items-stretch" :class="bgColor">
+        <div class="header text-white flex justify-between items-center mb-4">
             <div class="ml-2 w-1/3">x</div>
             <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">
                 Lara Task
@@ -56,6 +54,7 @@ import gql from "graphql-tag";
 import CardList from "../components/board/CardList";
 import BoardQuery from "../graphql/BoardWithListsAndCards.gql";
 import Logout from "../graphql/auth/Logout.gql";
+import { colorMap500 } from "../other/utils";
 import {
     EVENT_CARD_ADDED,
     EVENT_CARD_UPDATED,
@@ -70,12 +69,20 @@ export default {
     apollo: {
         board: {
             query: BoardQuery,
-            variables: {
-                id: 1
+            variables: function() {
+                return {
+                    id: Number(this.$route.params.id)
+                };
             }
         }
     },
     computed: {
+        bgColor: function() {
+            return {
+                "bg-gray-500": this.$apollo.loading,
+                [colorMap500[this.board?.color]]: true
+            };
+        },
         ...mapGetters(["isLoggedIn", "currentUser"])
     },
     methods: {
@@ -127,5 +134,6 @@ export default {
 <style scope>
 .header {
     height: 40px;
+    background-color: rgba(0, 0, 0, 0.2);
 }
 </style>

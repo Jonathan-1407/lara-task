@@ -6000,7 +6000,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../graphql/auth/Logout.gql */ "./resources/js/graphql/auth/Logout.gql");
 /* harmony import */ var _graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _other_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../other/constants */ "./resources/js/other/constants.js");
+/* harmony import */ var _other_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../other/utils */ "./resources/js/other/utils.js");
+/* harmony import */ var _other_constants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../other/constants */ "./resources/js/other/constants.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -6063,8 +6064,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
+
 
 
 
@@ -6079,12 +6079,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   apollo: {
     board: {
       query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_4___default.a,
-      variables: {
-        id: 1
+      variables: function variables() {
+        return {
+          id: Number(this.$route.params.id)
+        };
       }
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["isLoggedIn", "currentUser"])),
+  computed: _objectSpread({
+    bgColor: function bgColor() {
+      var _this$board;
+
+      return _defineProperty({
+        "bg-gray-500": this.$apollo.loading
+      }, _other_utils__WEBPACK_IMPORTED_MODULE_6__["colorMap500"][(_this$board = this.board) === null || _this$board === void 0 ? void 0 : _this$board.color], true);
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["isLoggedIn", "currentUser"])),
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["logout"])), {}, {
     _logout: function () {
       var _logout2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -6138,18 +6148,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
 
       switch (event.type) {
-        case _other_constants__WEBPACK_IMPORTED_MODULE_6__["EVENT_CARD_ADDED"]:
+        case _other_constants__WEBPACK_IMPORTED_MODULE_7__["EVENT_CARD_ADDED"]:
           data.board.lists;
           listById().cards.push(event.data);
           break;
 
-        case _other_constants__WEBPACK_IMPORTED_MODULE_6__["EVENT_CARD_UPDATED"]:
+        case _other_constants__WEBPACK_IMPORTED_MODULE_7__["EVENT_CARD_UPDATED"]:
           listById().cards.filter(function (card) {
             return card.id == event.data.id;
           }).title = event.data.title;
           break;
 
-        case _other_constants__WEBPACK_IMPORTED_MODULE_6__["EVENT_CARD_DELETED"]:
+        case _other_constants__WEBPACK_IMPORTED_MODULE_7__["EVENT_CARD_DELETED"]:
           listById().cards = listById().cards.filter(function (card) {
             return card.id != event.data.id;
           });
@@ -6579,7 +6589,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".header {\n  height: 40px;\n}\n", ""]);
+exports.push([module.i, ".header {\n  height: 40px;\n  background-color: rgba(0, 0, 0, 0.2);\n}\n", ""]);
 
 // exports
 
@@ -48055,14 +48065,15 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "h-screen h-full flex flex-col items-stretch bg-purple-500"
+      staticClass: "h-screen h-full flex flex-col items-stretch",
+      class: _vm.bgColor
     },
     [
       _c(
         "div",
         {
           staticClass:
-            "text-white flex justify-between items-center mb-4 bg-purple-600"
+            "header text-white flex justify-between items-center mb-4"
         },
         [
           _c("div", { staticClass: "ml-2 w-1/3" }, [_vm._v("x")]),
@@ -67296,12 +67307,38 @@ var EVENT_CARD_DELETED = "EVENT_CARD_DELETED";
 /*!*************************************!*\
   !*** ./resources/js/other/utils.js ***!
   \*************************************/
-/*! exports provided: gqlErrors */
+/*! exports provided: gqlErrors, AuthError, colorMap500 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gqlErrors", function() { return gqlErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthError", function() { return AuthError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "colorMap500", function() { return colorMap500; });
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new Map() : undefined; _wrapNativeSuper = function _wrapNativeSuper(Class) { if (Class === null || !_isNativeFunction(Class)) return Class; if (typeof Class !== "function") { throw new TypeError("Super expression must either be null or a function"); } if (typeof _cache !== "undefined") { if (_cache.has(Class)) return _cache.get(Class); _cache.set(Class, Wrapper); } function Wrapper() { return _construct(Class, arguments, _getPrototypeOf(this).constructor); } Wrapper.prototype = Object.create(Class.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }); return _setPrototypeOf(Wrapper, Class); }; return _wrapNativeSuper(Class); }
+
+function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 function gqlErrors(err) {
   var hasInternal = function hasInternal(errors) {
     return errors.some(function (e) {
@@ -67343,6 +67380,30 @@ function gqlErrors(err) {
     message: "Something bad happened"
   }).flat();
 }
+var AuthError = /*#__PURE__*/function (_Error) {
+  _inherits(AuthError, _Error);
+
+  var _super = _createSuper(AuthError);
+
+  function AuthError() {
+    _classCallCheck(this, AuthError);
+
+    return _super.apply(this, arguments);
+  }
+
+  return AuthError;
+}( /*#__PURE__*/_wrapNativeSuper(Error));
+var colorMap500 = {
+  teal: "bg-teal-500",
+  orange: "bg-orange-500",
+  gray: "bg-gray-500",
+  yellow: "bg-yellow-500",
+  purple: "bg-purple-500",
+  red: "bg-red-500",
+  green: "bg-green-500",
+  blue: "bg-blue-500",
+  indigo: "bg-indigo-500"
+};
 
 /***/ }),
 
@@ -67368,7 +67429,7 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var routes = [{
-  path: "/",
+  path: "/board/:id",
   name: "Board",
   component: _views_Board__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
