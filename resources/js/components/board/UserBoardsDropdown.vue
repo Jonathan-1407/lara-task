@@ -8,20 +8,28 @@
             <div class="text-gray-700 text-sm font-semibold mb-2 ml-2">
                 BOARDS
             </div>
-            <div
-                class="m-2 bg-teal-100 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex"
+            <router-link
+                class="m-2 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex"
+                :to="{ name: 'Board', params: { id: board.id } }"
+                v-for="board in userBoards"
+                :key="board.id"
+                :class="[`bg-${board.color}-100`]"
             >
-                <div class="bg-teal-200 w-10 rounded-sm rounded-r-none"></div>
-                <div class="p-2">The board name!</div>
-            </div>
+                <div
+                    class=" w-10 rounded-sm rounded-r-none"
+                    :class="[`bg-${board.color}-200`]"
+                ></div>
+                <div class="p-2">{{ board.title }}</div>
+            </router-link>
         </DropdownMenu>
     </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import DropdownMenu from "./DropdownMenu";
 import UserBoards from "../../graphql/user/Boards.gql";
-import { mapGetters } from "vuex";
+import { colorMap100, colorMap200 } from "../../other/utils";
 
 export default {
     name: "UserBoardsDropdown",
@@ -45,7 +53,9 @@ export default {
         showBoards: false
     }),
     computed: {
-        ...mapGetters(["currentUser"])
+        ...mapGetters(["currentUser"]),
+        colorMap100: () => colorMap100,
+        colorMap200: () => colorMap200
     }
 };
 </script>
