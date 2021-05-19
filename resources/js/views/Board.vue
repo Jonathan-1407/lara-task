@@ -3,12 +3,10 @@
         <div class="header text-white flex justify-between items-center mb-4">
             <div class="ml-2 w-1/3">
                 <button class="header-btn" @click="showBoards = !showBoards">
+                    <span class="fa fa-table"></span>
                     Boards
                 </button>
-                <div
-                    class="absolute bg-gray-200 rounded-sm mt-2 text-sm text-gray-600 shadow w-64 overflow-y-auto z-10"
-                    v-show="showBoards"
-                >
+                <DropdownMenu :show="showBoards">
                     <div class="text-gray-700 text-sm font-semibold mb-2 ml-2">
                         BOARDS
                     </div>
@@ -20,7 +18,7 @@
                         ></div>
                         <div class="p-2">The board name!</div>
                     </div>
-                </div>
+                </DropdownMenu>
             </div>
             <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">
                 Lara Task
@@ -72,6 +70,7 @@
 import { mapGetters, mapActions } from "vuex";
 import gql from "graphql-tag";
 import CardList from "../components/board/CardList";
+import DropdownMenu from "../components/board/DropdownMenu";
 import BoardQuery from "../graphql/BoardWithListsAndCards.gql";
 import Logout from "../graphql/auth/Logout.gql";
 import { colorMap500 } from "../other/utils";
@@ -84,7 +83,8 @@ import {
 export default {
     name: "Board",
     components: {
-        CardList
+        CardList,
+        DropdownMenu
     },
     apollo: {
         board: {
