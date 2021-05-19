@@ -6042,10 +6042,12 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _DropdownMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DropdownMenu */ "./resources/js/components/board/DropdownMenu.vue");
-/* harmony import */ var _graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../graphql/user/Boards.gql */ "./resources/js/graphql/user/Boards.gql");
-/* harmony import */ var _graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _other_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../other/utils */ "./resources/js/other/utils.js");
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-click-outside */ "./node_modules/vue-click-outside/index.js");
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _DropdownMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DropdownMenu */ "./resources/js/components/board/DropdownMenu.vue");
+/* harmony import */ var _graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../graphql/user/Boards.gql */ "./resources/js/graphql/user/Boards.gql");
+/* harmony import */ var _graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _other_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../other/utils */ "./resources/js/other/utils.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -6079,6 +6081,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+
 
 
 
@@ -6086,11 +6090,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserBoardsDropdown",
   components: {
-    DropdownMenu: _DropdownMenu__WEBPACK_IMPORTED_MODULE_1__["default"]
+    DropdownMenu: _DropdownMenu__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   apollo: {
     userBoards: {
-      query: _graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_2___default.a,
+      query: _graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_3___default.a,
       variables: function variables() {
         return {
           user_id: Number(this.currentUser.id)
@@ -6106,14 +6110,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       showBoards: false
     };
   },
+  methods: {
+    hide: function hide() {
+      this.showBoards = false;
+    }
+  },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["currentUser"])), {}, {
     colorMap100: function colorMap100() {
-      return _other_utils__WEBPACK_IMPORTED_MODULE_3__["colorMap100"];
+      return _other_utils__WEBPACK_IMPORTED_MODULE_4__["colorMap100"];
     },
     colorMap200: function colorMap200() {
-      return _other_utils__WEBPACK_IMPORTED_MODULE_3__["colorMap200"];
+      return _other_utils__WEBPACK_IMPORTED_MODULE_4__["colorMap200"];
     }
-  })
+  }),
+  directives: {
+    ClickOutside: vue_click_outside__WEBPACK_IMPORTED_MODULE_1___default.a
+  }
 });
 
 /***/ }),
@@ -47913,6 +47925,87 @@ if (GlobalVue) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-click-outside/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/vue-click-outside/index.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function validate(binding) {
+  if (typeof binding.value !== 'function') {
+    console.warn('[Vue-click-outside:] provided expression', binding.expression, 'is not a function.')
+    return false
+  }
+
+  return true
+}
+
+function isPopup(popupItem, elements) {
+  if (!popupItem || !elements)
+    return false
+
+  for (var i = 0, len = elements.length; i < len; i++) {
+    try {
+      if (popupItem.contains(elements[i])) {
+        return true
+      }
+      if (elements[i].contains(popupItem)) {
+        return false
+      }
+    } catch(e) {
+      return false
+    }
+  }
+
+  return false
+}
+
+function isServer(vNode) {
+  return typeof vNode.componentInstance !== 'undefined' && vNode.componentInstance.$isServer
+}
+
+exports = module.exports = {
+  bind: function (el, binding, vNode) {
+    if (!validate(binding)) return
+
+    // Define Handler and cache it on the element
+    function handler(e) {
+      if (!vNode.context) return
+
+      // some components may have related popup item, on which we shall prevent the click outside event handler.
+      var elements = e.path || (e.composedPath && e.composedPath())
+      elements && elements.length > 0 && elements.unshift(e.target)
+
+      if (el.contains(e.target) || isPopup(vNode.context.popupItem, elements)) return
+
+      el.__vueClickOutside__.callback(e)
+    }
+
+    // add Event Listeners
+    el.__vueClickOutside__ = {
+      handler: handler,
+      callback: binding.value
+    }
+    const clickHandler = 'ontouchstart' in document.documentElement ? 'touchstart' : 'click';
+    !isServer(vNode) && document.addEventListener(clickHandler, handler)
+  },
+
+  update: function (el, binding) {
+    if (validate(binding)) el.__vueClickOutside__.callback = binding.value
+  },
+
+  unbind: function (el, binding, vNode) {
+    // Remove Event Listeners
+    const clickHandler = 'ontouchstart' in document.documentElement ? 'touchstart' : 'click';
+    !isServer(vNode) && el.__vueClickOutside__ && document.removeEventListener(clickHandler, el.__vueClickOutside__.handler)
+    delete el.__vueClickOutside__
+  }
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/board/Card.vue?vue&type=template&id=ec52e678&":
 /*!*************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/board/Card.vue?vue&type=template&id=ec52e678& ***!
@@ -48300,6 +48393,16 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    {
+      directives: [
+        {
+          name: "click-outside",
+          rawName: "v-click-outside",
+          value: _vm.hide,
+          expression: "hide"
+        }
+      ]
+    },
     [
       _c(
         "button",
@@ -48307,6 +48410,7 @@ var render = function() {
           staticClass: "header-btn",
           on: {
             click: function($event) {
+              $event.preventDefault()
               _vm.showBoards = !_vm.showBoards
             }
           }
@@ -48334,13 +48438,18 @@ var render = function() {
                 key: board.id,
                 staticClass:
                   "m-2 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex",
-                class: ["bg-" + board.color + "-100"],
-                attrs: { to: { name: "Board", params: { id: board.id } } }
+                class: _vm.colorMap100[board.color],
+                attrs: { to: { name: "Board", params: { id: board.id } } },
+                nativeOn: {
+                  click: function($event) {
+                    return _vm.hide($event)
+                  }
+                }
               },
               [
                 _c("div", {
                   staticClass: " w-10 rounded-sm rounded-r-none",
-                  class: ["bg-" + board.color + "-200"]
+                  class: _vm.colorMap200[board.color]
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "p-2" }, [_vm._v(_vm._s(board.title))])

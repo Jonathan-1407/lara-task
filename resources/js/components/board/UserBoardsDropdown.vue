@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <button class="header-btn" @click="showBoards = !showBoards">
+    <div v-click-outside="hide">
+        <button class="header-btn" @click.prevent="showBoards = !showBoards">
             <span class="fa fa-table"></span>
             Boards
         </button>
@@ -13,11 +13,12 @@
                 :to="{ name: 'Board', params: { id: board.id } }"
                 v-for="board in userBoards"
                 :key="board.id"
-                :class="[`bg-${board.color}-100`]"
+                :class="colorMap100[board.color]"
+                @click.native="hide"
             >
                 <div
                     class=" w-10 rounded-sm rounded-r-none"
-                    :class="[`bg-${board.color}-200`]"
+                    :class="colorMap200[board.color]"
                 ></div>
                 <div class="p-2">{{ board.title }}</div>
             </router-link>
@@ -27,6 +28,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import ClickOutside from "vue-click-outside";
 import DropdownMenu from "./DropdownMenu";
 import UserBoards from "../../graphql/user/Boards.gql";
 import { colorMap100, colorMap200 } from "../../other/utils";
@@ -52,10 +54,18 @@ export default {
     data: () => ({
         showBoards: false
     }),
+    methods: {
+        hide: function() {
+            this.showBoards = false;
+        }
+    },
     computed: {
         ...mapGetters(["currentUser"]),
         colorMap100: () => colorMap100,
         colorMap200: () => colorMap200
+    },
+    directives: {
+        ClickOutside
     }
 };
 </script>
