@@ -18,11 +18,15 @@
             :list="list"
             @added="$emit('card-added', { ...$event, list_id: list.id })"
         ></CardAddEditor>
-        <CardAddButton v-else @click="editing = true"></CardAddButton>
+        <CardAddButton
+            v-if="!editing && list.board.owner.id == currentUser.id"
+            @click="editing = true"
+        ></CardAddButton>
     </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import Card from "../../components/board/Card";
 import CardAddButton from "../../components/board/CardAddButton";
 import CardAddEditor from "../../components/board/CardAddEditor";
@@ -35,6 +39,9 @@ export default {
     data: () => ({
         editing: false
     }),
+    computed: {
+        ...mapGetters(["currentUser"])
+    },
     components: {
         Card,
         CardAddButton,
