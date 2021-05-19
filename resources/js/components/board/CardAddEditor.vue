@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import CardAdd from "../../graphql/CardAdd.gql";
 import BoardQuery from "../../graphql/BoardWithListsAndCards.gql";
 import { EVENT_CARD_ADDED } from "../../other/constants";
@@ -24,6 +25,9 @@ export default {
     data: () => ({
         title: ""
     }),
+    computed: {
+        ...mapGetters(["currentUser"])
+    },
     methods: {
         addCard: function() {
             let self = this;
@@ -34,7 +38,7 @@ export default {
                     title: self.title,
                     order: self.list.cards.length + 1,
                     list_id: self.list.id,
-                    owner_id: 1
+                    owner_id: Number(self.currentUser.id)
                 },
                 update: function(store, { data: { cardAdd } }) {
                     self.$emit("added", {
