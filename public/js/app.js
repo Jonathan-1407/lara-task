@@ -6032,6 +6032,76 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/board/UserBoardsDropdown.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/board/UserBoardsDropdown.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DropdownMenu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DropdownMenu */ "./resources/js/components/board/DropdownMenu.vue");
+/* harmony import */ var _graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../graphql/user/Boards.gql */ "./resources/js/graphql/user/Boards.gql");
+/* harmony import */ var _graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "UserBoardsDropdown",
+  components: {
+    DropdownMenu: _DropdownMenu__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  apollo: {
+    userBoards: {
+      query: _graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_1___default.a,
+      variables: function variables() {
+        return {
+          user_id: Number(this.currentUser.id)
+        };
+      },
+      skip: function skip() {
+        return !Number(this.currentUser.id);
+      }
+    }
+  },
+  data: function data() {
+    return {
+      showBoards: false
+    };
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(["currentUser"]))
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Board.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Board.vue?vue&type=script&lang=js& ***!
@@ -6046,7 +6116,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/lib/index.js");
 /* harmony import */ var _components_board_CardList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/board/CardList */ "./resources/js/components/board/CardList.vue");
-/* harmony import */ var _components_board_DropdownMenu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/board/DropdownMenu */ "./resources/js/components/board/DropdownMenu.vue");
+/* harmony import */ var _components_board_UserBoardsDropdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/board/UserBoardsDropdown */ "./resources/js/components/board/UserBoardsDropdown.vue");
 /* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../graphql/BoardWithListsAndCards.gql */ "./resources/js/graphql/BoardWithListsAndCards.gql");
 /* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../graphql/auth/Logout.gql */ "./resources/js/graphql/auth/Logout.gql");
@@ -6117,22 +6187,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -6145,7 +6199,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "Board",
   components: {
     CardList: _components_board_CardList__WEBPACK_IMPORTED_MODULE_3__["default"],
-    DropdownMenu: _components_board_DropdownMenu__WEBPACK_IMPORTED_MODULE_4__["default"]
+    UserBoardsDropdown: _components_board_UserBoardsDropdown__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   apollo: {
     board: {
@@ -6156,11 +6210,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         };
       }
     }
-  },
-  data: function data() {
-    return {
-      showBoards: false
-    };
   },
   computed: _objectSpread({
     bgColor: function bgColor() {
@@ -48218,6 +48267,73 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/board/UserBoardsDropdown.vue?vue&type=template&id=287dee5d&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/board/UserBoardsDropdown.vue?vue&type=template&id=287dee5d& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "button",
+        {
+          staticClass: "header-btn",
+          on: {
+            click: function($event) {
+              _vm.showBoards = !_vm.showBoards
+            }
+          }
+        },
+        [
+          _c("span", { staticClass: "fa fa-table" }),
+          _vm._v("\n        Boards\n    ")
+        ]
+      ),
+      _vm._v(" "),
+      _c("DropdownMenu", { attrs: { show: _vm.showBoards } }, [
+        _c(
+          "div",
+          { staticClass: "text-gray-700 text-sm font-semibold mb-2 ml-2" },
+          [_vm._v("\n            BOARDS\n        ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "m-2 bg-teal-100 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex"
+          },
+          [
+            _c("div", {
+              staticClass: "bg-teal-200 w-10 rounded-sm rounded-r-none"
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-2" }, [_vm._v("The board name!")])
+          ]
+        )
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Board.vue?vue&type=template&id=19b23257&":
 /*!***************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Board.vue?vue&type=template&id=19b23257& ***!
@@ -48250,50 +48366,7 @@ var render = function() {
           _c(
             "div",
             { staticClass: "ml-2 w-1/3" },
-            [
-              _c(
-                "button",
-                {
-                  staticClass: "header-btn",
-                  on: {
-                    click: function($event) {
-                      _vm.showBoards = !_vm.showBoards
-                    }
-                  }
-                },
-                [
-                  _c("span", { staticClass: "fa fa-table" }),
-                  _vm._v("\n                Boards\n            ")
-                ]
-              ),
-              _vm._v(" "),
-              _c("DropdownMenu", { attrs: { show: _vm.showBoards } }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "text-gray-700 text-sm font-semibold mb-2 ml-2"
-                  },
-                  [_vm._v("\n                    BOARDS\n                ")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "m-2 bg-teal-100 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex"
-                  },
-                  [
-                    _c("div", {
-                      staticClass: "bg-teal-200 w-10 rounded-sm rounded-r-none"
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "p-2" }, [
-                      _vm._v("The board name!")
-                    ])
-                  ]
-                )
-              ])
-            ],
+            [_c("UserBoardsDropdown")],
             1
           ),
           _vm._v(" "),
@@ -66531,6 +66604,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/board/UserBoardsDropdown.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/board/UserBoardsDropdown.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _UserBoardsDropdown_vue_vue_type_template_id_287dee5d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserBoardsDropdown.vue?vue&type=template&id=287dee5d& */ "./resources/js/components/board/UserBoardsDropdown.vue?vue&type=template&id=287dee5d&");
+/* harmony import */ var _UserBoardsDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserBoardsDropdown.vue?vue&type=script&lang=js& */ "./resources/js/components/board/UserBoardsDropdown.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UserBoardsDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UserBoardsDropdown_vue_vue_type_template_id_287dee5d___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UserBoardsDropdown_vue_vue_type_template_id_287dee5d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/board/UserBoardsDropdown.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/board/UserBoardsDropdown.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/board/UserBoardsDropdown.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserBoardsDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./UserBoardsDropdown.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/board/UserBoardsDropdown.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserBoardsDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/board/UserBoardsDropdown.vue?vue&type=template&id=287dee5d&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/board/UserBoardsDropdown.vue?vue&type=template&id=287dee5d& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserBoardsDropdown_vue_vue_type_template_id_287dee5d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./UserBoardsDropdown.vue?vue&type=template&id=287dee5d& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/board/UserBoardsDropdown.vue?vue&type=template&id=287dee5d&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserBoardsDropdown_vue_vue_type_template_id_287dee5d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserBoardsDropdown_vue_vue_type_template_id_287dee5d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/graphql/BoardWithListsAndCards.gql":
 /*!*********************************************************!*\
   !*** ./resources/js/graphql/BoardWithListsAndCards.gql ***!
@@ -67586,6 +67728,139 @@ __webpack_require__.r(__webpack_exports__);
     module.exports = doc;
     
         module.exports["Register"] = oneQuery(doc, "Register");
+        
+
+
+/***/ }),
+
+/***/ "./resources/js/graphql/user/Boards.gql":
+/*!**********************************************!*\
+  !*** ./resources/js/graphql/user/Boards.gql ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"UserBoards"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userBoards"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"owner_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"color"},"arguments":[],"directives":[]}]}}]}}],"loc":{"start":0,"end":118}};
+    doc.loc.source = {"body":"query UserBoards($user_id: ID!) {\n    userBoards(owner_id: $user_id) {\n        id\n        title\n        color\n    }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
+  
+
+    var names = {};
+    function unique(defs) {
+      return defs.filter(
+        function(def) {
+          if (def.kind !== 'FragmentDefinition') return true;
+          var name = def.name.value
+          if (names[name]) {
+            return false;
+          } else {
+            names[name] = true;
+            return true;
+          }
+        }
+      )
+    }
+  
+
+    // Collect any fragment/type references from a node, adding them to the refs Set
+    function collectFragmentReferences(node, refs) {
+      if (node.kind === "FragmentSpread") {
+        refs.add(node.name.value);
+      } else if (node.kind === "VariableDefinition") {
+        var type = node.type;
+        if (type.kind === "NamedType") {
+          refs.add(type.name.value);
+        }
+      }
+
+      if (node.selectionSet) {
+        node.selectionSet.selections.forEach(function(selection) {
+          collectFragmentReferences(selection, refs);
+        });
+      }
+
+      if (node.variableDefinitions) {
+        node.variableDefinitions.forEach(function(def) {
+          collectFragmentReferences(def, refs);
+        });
+      }
+
+      if (node.definitions) {
+        node.definitions.forEach(function(def) {
+          collectFragmentReferences(def, refs);
+        });
+      }
+    }
+
+    var definitionRefs = {};
+    (function extractReferences() {
+      doc.definitions.forEach(function(def) {
+        if (def.name) {
+          var refs = new Set();
+          collectFragmentReferences(def, refs);
+          definitionRefs[def.name.value] = refs;
+        }
+      });
+    })();
+
+    function findOperation(doc, name) {
+      for (var i = 0; i < doc.definitions.length; i++) {
+        var element = doc.definitions[i];
+        if (element.name && element.name.value == name) {
+          return element;
+        }
+      }
+    }
+
+    function oneQuery(doc, operationName) {
+      // Copy the DocumentNode, but clear out the definitions
+      var newDoc = {
+        kind: doc.kind,
+        definitions: [findOperation(doc, operationName)]
+      };
+      if (doc.hasOwnProperty("loc")) {
+        newDoc.loc = doc.loc;
+      }
+
+      // Now, for the operation we're running, find any fragments referenced by
+      // it or the fragments it references
+      var opRefs = definitionRefs[operationName] || new Set();
+      var allRefs = new Set();
+      var newRefs = new Set();
+
+      // IE 11 doesn't support "new Set(iterable)", so we add the members of opRefs to newRefs one by one
+      opRefs.forEach(function(refName) {
+        newRefs.add(refName);
+      });
+
+      while (newRefs.size > 0) {
+        var prevRefs = newRefs;
+        newRefs = new Set();
+
+        prevRefs.forEach(function(refName) {
+          if (!allRefs.has(refName)) {
+            allRefs.add(refName);
+            var childRefs = definitionRefs[refName] || new Set();
+            childRefs.forEach(function(childRef) {
+              newRefs.add(childRef);
+            });
+          }
+        });
+      }
+
+      allRefs.forEach(function(refName) {
+        var op = findOperation(doc, refName);
+        if (op) {
+          newDoc.definitions.push(op);
+        }
+      });
+
+      return newDoc;
+    }
+    
+    module.exports = doc;
+    
+        module.exports["UserBoards"] = oneQuery(doc, "UserBoards");
         
 
 
