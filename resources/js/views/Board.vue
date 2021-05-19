@@ -1,7 +1,27 @@
 <template>
     <div class="h-screen h-full flex flex-col items-stretch" :class="bgColor">
         <div class="header text-white flex justify-between items-center mb-4">
-            <div class="ml-2 w-1/3">x</div>
+            <div class="ml-2 w-1/3">
+                <button class="header-btn" @click="showBoards = !showBoards">
+                    Boards
+                </button>
+                <div
+                    class="absolute bg-gray-200 rounded-sm mt-2 text-sm text-gray-600 shadow w-64 overflow-y-auto z-10"
+                    v-show="showBoards"
+                >
+                    <div class="text-gray-700 text-sm font-semibold mb-2 ml-2">
+                        BOARDS
+                    </div>
+                    <div
+                        class="m-2 bg-teal-100 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex"
+                    >
+                        <div
+                            class="bg-teal-200 w-10 rounded-sm rounded-r-none"
+                        ></div>
+                        <div class="p-2">The board name!</div>
+                    </div>
+                </div>
+            </div>
             <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">
                 Lara Task
             </div>
@@ -76,6 +96,9 @@ export default {
             }
         }
     },
+    data: () => ({
+        showBoards: false
+    }),
     computed: {
         bgColor: function() {
             return {

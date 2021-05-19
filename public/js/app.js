@@ -6085,6 +6085,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6106,6 +6126,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         };
       }
     }
+  },
+  data: function data() {
+    return {
+      showBoards: false
+    };
   },
   computed: _objectSpread({
     bgColor: function bgColor() {
@@ -48101,7 +48126,47 @@ var render = function() {
             "header text-white flex justify-between items-center mb-4"
         },
         [
-          _c("div", { staticClass: "ml-2 w-1/3" }, [_vm._v("x")]),
+          _c("div", { staticClass: "ml-2 w-1/3" }, [
+            _c(
+              "button",
+              {
+                staticClass: "header-btn",
+                on: {
+                  click: function($event) {
+                    _vm.showBoards = !_vm.showBoards
+                  }
+                }
+              },
+              [_vm._v("\n                Boards\n            ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.showBoards,
+                    expression: "showBoards"
+                  }
+                ],
+                staticClass:
+                  "absolute bg-gray-200 rounded-sm mt-2 text-sm text-gray-600 shadow w-64 overflow-y-auto z-10"
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "text-gray-700 text-sm font-semibold mb-2 ml-2"
+                  },
+                  [_vm._v("\n                    BOARDS\n                ")]
+                ),
+                _vm._v(" "),
+                _vm._m(0)
+              ]
+            )
+          ]),
           _vm._v(" "),
           _c(
             "div",
@@ -48218,7 +48283,27 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "m-2 bg-teal-100 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex"
+      },
+      [
+        _c("div", {
+          staticClass: "bg-teal-200 w-10 rounded-sm rounded-r-none"
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "p-2" }, [_vm._v("The board name!")])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
