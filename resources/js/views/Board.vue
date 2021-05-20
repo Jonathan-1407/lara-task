@@ -45,6 +45,7 @@
                     @card-updated="updateQueryCache($event)"
                     @card-deleted="updateQueryCache($event)"
                 ></CardList>
+                <ListCardEditor></ListCardEditor>
             </div>
         </div>
     </div>
@@ -54,6 +55,7 @@
 import { mapGetters, mapActions } from "vuex";
 import gql from "graphql-tag";
 import CardList from "../components/board/CardList";
+import ListCardEditor from "../components/board/list/CardEditor";
 import UserBoardsDropdown from "../components/board/UserBoardsDropdown";
 import BoardQuery from "../graphql/BoardWithListsAndCards.gql";
 import Logout from "../graphql/auth/Logout.gql";
@@ -67,6 +69,7 @@ import {
 export default {
     name: "Board",
     components: {
+        ListCardEditor,
         CardList,
         UserBoardsDropdown
     },

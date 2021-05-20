@@ -6242,6 +6242,89 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/board/list/CardEditor.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/board/list/CardEditor.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-click-outside */ "./node_modules/vue-click-outside/index.js");
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "ListCardEditor",
+  data: function data() {
+    return {
+      editing: false,
+      title: null
+    };
+  },
+  methods: {
+    hideEditor: function hideEditor() {
+      this.editing = false;
+    },
+    startEditing: function startEditing() {
+      var _this = this;
+
+      this.editing = true; // Activate input: focus
+
+      this.$nextTick(function () {
+        return _this.$refs.title.focus();
+      });
+    }
+  },
+  directives: {
+    ClickOutside: vue_click_outside__WEBPACK_IMPORTED_MODULE_0___default.a
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/board/modal/BoardColor.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/board/modal/BoardColor.vue?vue&type=script&lang=js& ***!
@@ -6345,13 +6428,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/lib/index.js");
 /* harmony import */ var _components_board_CardList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/board/CardList */ "./resources/js/components/board/CardList.vue");
-/* harmony import */ var _components_board_UserBoardsDropdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/board/UserBoardsDropdown */ "./resources/js/components/board/UserBoardsDropdown.vue");
-/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../graphql/BoardWithListsAndCards.gql */ "./resources/js/graphql/BoardWithListsAndCards.gql");
-/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../graphql/auth/Logout.gql */ "./resources/js/graphql/auth/Logout.gql");
-/* harmony import */ var _graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _other_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../other/utils */ "./resources/js/other/utils.js");
-/* harmony import */ var _other_constants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../other/constants */ "./resources/js/other/constants.js");
+/* harmony import */ var _components_board_list_CardEditor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/board/list/CardEditor */ "./resources/js/components/board/list/CardEditor.vue");
+/* harmony import */ var _components_board_UserBoardsDropdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/board/UserBoardsDropdown */ "./resources/js/components/board/UserBoardsDropdown.vue");
+/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../graphql/BoardWithListsAndCards.gql */ "./resources/js/graphql/BoardWithListsAndCards.gql");
+/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../graphql/auth/Logout.gql */ "./resources/js/graphql/auth/Logout.gql");
+/* harmony import */ var _graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _other_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../other/utils */ "./resources/js/other/utils.js");
+/* harmony import */ var _other_constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../other/constants */ "./resources/js/other/constants.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -6416,6 +6500,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+
 
 
 
@@ -6427,12 +6513,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Board",
   components: {
+    ListCardEditor: _components_board_list_CardEditor__WEBPACK_IMPORTED_MODULE_4__["default"],
     CardList: _components_board_CardList__WEBPACK_IMPORTED_MODULE_3__["default"],
-    UserBoardsDropdown: _components_board_UserBoardsDropdown__WEBPACK_IMPORTED_MODULE_4__["default"]
+    UserBoardsDropdown: _components_board_UserBoardsDropdown__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   apollo: {
     board: {
-      query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_5___default.a,
+      query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_6___default.a,
       variables: function variables() {
         return {
           id: Number(this.$route.params.id)
@@ -6446,7 +6533,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return _defineProperty({
         "bg-gray-500": this.$apollo.loading
-      }, _other_utils__WEBPACK_IMPORTED_MODULE_7__["colorMap500"][(_this$board = this.board) === null || _this$board === void 0 ? void 0 : _this$board.color], true);
+      }, _other_utils__WEBPACK_IMPORTED_MODULE_8__["colorMap500"][(_this$board = this.board) === null || _this$board === void 0 ? void 0 : _this$board.color], true);
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["isLoggedIn", "currentUser"])),
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["logout"])), {}, {
@@ -6462,7 +6549,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 self = this;
                 _context.next = 3;
                 return self.$apollo.mutate({
-                  mutation: _graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_6___default.a
+                  mutation: _graphql_auth_Logout_gql__WEBPACK_IMPORTED_MODULE_7___default.a
                 });
 
               case 3:
@@ -6489,7 +6576,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     updateQueryCache: function updateQueryCache(event) {
       var self = this;
       var data = event.store.readQuery({
-        query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_5___default.a,
+        query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_6___default.a,
         variables: {
           id: Number(self.board.id)
         }
@@ -6502,18 +6589,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
 
       switch (event.type) {
-        case _other_constants__WEBPACK_IMPORTED_MODULE_8__["EVENT_CARD_ADDED"]:
+        case _other_constants__WEBPACK_IMPORTED_MODULE_9__["EVENT_CARD_ADDED"]:
           data.board.lists;
           listById().cards.push(event.data);
           break;
 
-        case _other_constants__WEBPACK_IMPORTED_MODULE_8__["EVENT_CARD_UPDATED"]:
+        case _other_constants__WEBPACK_IMPORTED_MODULE_9__["EVENT_CARD_UPDATED"]:
           listById().cards.filter(function (card) {
             return card.id == event.data.id;
           }).title = event.data.title;
           break;
 
-        case _other_constants__WEBPACK_IMPORTED_MODULE_8__["EVENT_CARD_DELETED"]:
+        case _other_constants__WEBPACK_IMPORTED_MODULE_9__["EVENT_CARD_DELETED"]:
           listById().cards = listById().cards.filter(function (card) {
             return card.id != event.data.id;
           });
@@ -6521,7 +6608,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       event.store.writeQuery({
-        query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_5___default.a,
+        query: _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_6___default.a,
         data: data
       });
     }
@@ -48538,7 +48625,7 @@ var render = function() {
             "py-1 px-3 ml-1 rounded-md hover:bg-gray-400 cursor-pointer text-gray-500",
           on: { click: _vm.close }
         },
-        [_vm._v("\n            Cancel\n        ")]
+        [_c("span", { staticClass: "fa fa-times" })]
       )
     ])
   ])
@@ -48872,6 +48959,116 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/board/list/CardEditor.vue?vue&type=template&id=0577a42c&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/board/list/CardEditor.vue?vue&type=template&id=0577a42c& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    !_vm.editing
+      ? _c(
+          "div",
+          {
+            staticClass:
+              "list bg-white hover:bg-gray-400 rounded-sm p-2 mr-2 opacity-75 text-black cursor-pointer",
+            on: { click: _vm.startEditing }
+          },
+          [
+            _c("span", { staticClass: "fa fa-plus" }),
+            _vm._v("\n        Add another list\n    ")
+          ]
+        )
+      : _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "click-outside",
+                rawName: "v-click-outside",
+                value: _vm.hideEditor,
+                expression: "hideEditor"
+              }
+            ],
+            staticClass: "bg-gray-300 rounded-sm p-2 list"
+          },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.title,
+                  expression: "title"
+                }
+              ],
+              ref: "title",
+              staticClass:
+                "rounded-sm border-blue-500 border-2 px-1 py-2 outline-none w-full text-gray-800 text-sm",
+              attrs: { type: "text", placeholder: "Enter list title..." },
+              domProps: { value: _vm.title },
+              on: {
+                keyup: function($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "esc", 27, $event.key, [
+                      "Esc",
+                      "Escape"
+                    ])
+                  ) {
+                    return null
+                  }
+                  return _vm.hideEditor($event)
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.title = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex" }, [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "mt-2 rounded-sm py-1 px-3 bg-blue-700 text-white cursor-pointer hover:bg-blue-500 outline-none"
+                },
+                [_vm._v("\n                Add\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "mt-2 ml-1 px-2 rounded-sm hover:bg-gray-400 cursor-pointer text-gray-500 flex items-center justify-center",
+                  on: { click: _vm.hideEditor }
+                },
+                [_c("span", { staticClass: "fa fa-times" })]
+              )
+            ])
+          ]
+        )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/board/modal/BoardColor.vue?vue&type=template&id=37610e1a&":
 /*!*************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/board/modal/BoardColor.vue?vue&type=template&id=37610e1a& ***!
@@ -49114,24 +49311,28 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "flex flex-1 items-start overflow-x-auto mx-2" },
-                _vm._l(_vm.board.lists, function(list) {
-                  return _c("CardList", {
-                    key: list.id,
-                    attrs: { list: list },
-                    on: {
-                      "card-added": function($event) {
-                        return _vm.updateQueryCache($event)
-                      },
-                      "card-updated": function($event) {
-                        return _vm.updateQueryCache($event)
-                      },
-                      "card-deleted": function($event) {
-                        return _vm.updateQueryCache($event)
+                [
+                  _vm._l(_vm.board.lists, function(list) {
+                    return _c("CardList", {
+                      key: list.id,
+                      attrs: { list: list },
+                      on: {
+                        "card-added": function($event) {
+                          return _vm.updateQueryCache($event)
+                        },
+                        "card-updated": function($event) {
+                          return _vm.updateQueryCache($event)
+                        },
+                        "card-deleted": function($event) {
+                          return _vm.updateQueryCache($event)
+                        }
                       }
-                    }
-                  })
-                }),
-                1
+                    })
+                  }),
+                  _vm._v(" "),
+                  _c("ListCardEditor")
+                ],
+                2
               )
             ]
           )
@@ -67339,6 +67540,76 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserBoardsDropdown_vue_vue_type_template_id_287dee5d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserBoardsDropdown_vue_vue_type_template_id_287dee5d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/board/list/CardEditor.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/board/list/CardEditor.vue ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CardEditor_vue_vue_type_template_id_0577a42c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CardEditor.vue?vue&type=template&id=0577a42c& */ "./resources/js/components/board/list/CardEditor.vue?vue&type=template&id=0577a42c&");
+/* harmony import */ var _CardEditor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CardEditor.vue?vue&type=script&lang=js& */ "./resources/js/components/board/list/CardEditor.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _CardEditor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _CardEditor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CardEditor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CardEditor_vue_vue_type_template_id_0577a42c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CardEditor_vue_vue_type_template_id_0577a42c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/board/list/CardEditor.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/board/list/CardEditor.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/board/list/CardEditor.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CardEditor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./CardEditor.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/board/list/CardEditor.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CardEditor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/board/list/CardEditor.vue?vue&type=template&id=0577a42c&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/board/list/CardEditor.vue?vue&type=template&id=0577a42c& ***!
+  \******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardEditor_vue_vue_type_template_id_0577a42c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./CardEditor.vue?vue&type=template&id=0577a42c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/board/list/CardEditor.vue?vue&type=template&id=0577a42c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardEditor_vue_vue_type_template_id_0577a42c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardEditor_vue_vue_type_template_id_0577a42c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -21,7 +21,7 @@
                 class="py-1 px-3 ml-1 rounded-md hover:bg-gray-400 cursor-pointer text-gray-500"
                 @click="close"
             >
-                Cancel
+                <span class="fa fa-times"></span>
             </button>
         </div>
     </div>
