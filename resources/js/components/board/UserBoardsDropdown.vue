@@ -1,15 +1,15 @@
 <template>
     <div v-click-outside="hide">
         <button class="header-btn" @click.prevent="showBoards = !showBoards">
-            <span class="fa fa-table"></span>
+            <span class="fa fa-columns"></span>
             Boards
         </button>
         <DropdownMenu :show="showBoards">
-            <div class="text-gray-700 text-sm font-semibold mb-2 ml-2">
+            <div class="text-gray-700 text-sm font-semibold mb-2 ml-1">
                 BOARDS
             </div>
             <router-link
-                class="m-2 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex"
+                class="rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex mb-1 ml-1"
                 :to="{ name: 'Board', params: { id: board.id } }"
                 v-for="board in userBoards"
                 :key="board.id"
@@ -22,7 +22,24 @@
                 ></div>
                 <div class="p-2">{{ board.title }}</div>
             </router-link>
+            <div
+                class="rounded-sm hover:text-gray-800 p-2 underline cursor-pointer mt-4"
+                @click="
+                    showModal = true;
+                    showBoards = false;
+                "
+            >
+                Create new board...
+            </div>
         </DropdownMenu>
+        <Modal
+            :width="300"
+            :height="250"
+            v-if="showModal"
+            @closed="showModal = false"
+        >
+            Hello thats a message inside the modal
+        </Modal>
     </div>
 </template>
 
@@ -30,13 +47,15 @@
 import { mapGetters } from "vuex";
 import ClickOutside from "vue-click-outside";
 import DropdownMenu from "./DropdownMenu";
+import Modal from "./modal/Modal";
 import UserBoards from "../../graphql/user/Boards.gql";
 import { colorMap100, colorMap200 } from "../../other/utils";
 
 export default {
     name: "UserBoardsDropdown",
     components: {
-        DropdownMenu
+        DropdownMenu,
+        Modal
     },
     apollo: {
         userBoards: {
@@ -52,7 +71,8 @@ export default {
         }
     },
     data: () => ({
-        showBoards: false
+        showBoards: false,
+        showModal: false
     }),
     methods: {
         hide: function() {
