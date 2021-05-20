@@ -1,7 +1,7 @@
 <template>
     <div v-click-outside="hide">
         <button class="header-btn" @click.prevent="showBoards = !showBoards">
-            <span class="fa fa-columns"></span>
+            <span class="fa fa-th-list"></span>
             Boards
         </button>
         <DropdownMenu :show="showBoards">
@@ -47,6 +47,7 @@
                         type="text"
                         placeholder="Add board title"
                         class="title rounded-sm text-white outline-none py-1 px-2 font-bold w-full hover:opacity-50 placeholder-gray-100"
+                        v-model="title"
                     />
                 </div>
 
@@ -69,8 +70,10 @@
 
             <div class="mt-4">
                 <button
+                    :disabled="cannotCreate"
                     :class="colors[color]"
-                    class="rounded-sm py-2 px-4 text-black hover:opacity-75 cursor-pointer"
+                    class="rounded-sm py-2 px-4 text-black hover:opacity-75 cursor-pointer disabled:opacity-25"
+                    @click="addBoard()"
                 >
                     Create
                 </button>
@@ -86,6 +89,7 @@ import DropdownMenu from "./DropdownMenu";
 import Modal from "./modal/Modal";
 import BoardColor from "./modal/BoardColor";
 import UserBoards from "../../graphql/user/Boards.gql";
+import BoardAdd from "../../graphql/BoardAdd.gql";
 import {
     colorGrid,
     colorMap100,
@@ -122,6 +126,37 @@ export default {
     methods: {
         hide: function() {
             this.showBoards = false;
+        },
+        addBoard: function() {
+            let self = this;
+            self.$apollo.mutate({
+                mutation: BoardAdd,
+                variables: {
+                    title: self.title,
+                    color: self.color
+                },
+                update: function(store, { data: { boardAdd } }) {
+                    const data = store.readQuery({
+                        query: UserBoards,
+                        variables: {
+                            user_id: Number(self.currentUser.id)
+                        }
+                    });
+
+                    data.userBoards.push(boardAdd);
+                    store.writeQuery({
+                        query: UserBoards,
+                        data,
+                        variables: { user_id: Number(self.currentUser.id) }
+                    });
+                    self.showModal = false;
+                    self.title = "";
+                    self.$router.push({
+                        name: "Board",
+                        params: { id: boardAdd.id }
+                    });
+                }
+            });
         }
     },
     computed: {
@@ -129,7 +164,10 @@ export default {
         colorMap100: () => colorMap100,
         colorMap200: () => colorMap200,
         colors: () => colorMap500,
-        colorGrid: () => colorGrid
+        colorGrid: () => colorGrid,
+        cannotCreate: function() {
+            return this.title == null || this.title.length == 0;
+        }
     },
     directives: {
         ClickOutside

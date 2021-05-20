@@ -6049,7 +6049,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modal_BoardColor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modal/BoardColor */ "./resources/js/components/board/modal/BoardColor.vue");
 /* harmony import */ var _graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../graphql/user/Boards.gql */ "./resources/js/graphql/user/Boards.gql");
 /* harmony import */ var _graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _other_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../other/utils */ "./resources/js/other/utils.js");
+/* harmony import */ var _graphql_BoardAdd_gql__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../graphql/BoardAdd.gql */ "./resources/js/graphql/BoardAdd.gql");
+/* harmony import */ var _graphql_BoardAdd_gql__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardAdd_gql__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _other_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../other/utils */ "./resources/js/other/utils.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -6137,6 +6139,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -6175,20 +6181,58 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     hide: function hide() {
       this.showBoards = false;
+    },
+    addBoard: function addBoard() {
+      var self = this;
+      self.$apollo.mutate({
+        mutation: _graphql_BoardAdd_gql__WEBPACK_IMPORTED_MODULE_6___default.a,
+        variables: {
+          title: self.title,
+          color: self.color
+        },
+        update: function update(store, _ref) {
+          var boardAdd = _ref.data.boardAdd;
+          var data = store.readQuery({
+            query: _graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_5___default.a,
+            variables: {
+              user_id: Number(self.currentUser.id)
+            }
+          });
+          data.userBoards.push(boardAdd);
+          store.writeQuery({
+            query: _graphql_user_Boards_gql__WEBPACK_IMPORTED_MODULE_5___default.a,
+            data: data,
+            variables: {
+              user_id: Number(self.currentUser.id)
+            }
+          });
+          self.showModal = false;
+          self.title = "";
+          self.$router.push({
+            name: "Board",
+            params: {
+              id: boardAdd.id
+            }
+          });
+        }
+      });
     }
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["currentUser"])), {}, {
     colorMap100: function colorMap100() {
-      return _other_utils__WEBPACK_IMPORTED_MODULE_6__["colorMap100"];
+      return _other_utils__WEBPACK_IMPORTED_MODULE_7__["colorMap100"];
     },
     colorMap200: function colorMap200() {
-      return _other_utils__WEBPACK_IMPORTED_MODULE_6__["colorMap200"];
+      return _other_utils__WEBPACK_IMPORTED_MODULE_7__["colorMap200"];
     },
     colors: function colors() {
-      return _other_utils__WEBPACK_IMPORTED_MODULE_6__["colorMap500"];
+      return _other_utils__WEBPACK_IMPORTED_MODULE_7__["colorMap500"];
     },
     colorGrid: function colorGrid() {
-      return _other_utils__WEBPACK_IMPORTED_MODULE_6__["colorGrid"];
+      return _other_utils__WEBPACK_IMPORTED_MODULE_7__["colorGrid"];
+    },
+    cannotCreate: function cannotCreate() {
+      return this.title == null || this.title.length == 0;
     }
   }),
   directives: {
@@ -48671,7 +48715,7 @@ var render = function() {
           }
         },
         [
-          _c("span", { staticClass: "fa fa-columns" }),
+          _c("span", { staticClass: "fa fa-th-list" }),
           _vm._v("\n        Boards\n    ")
         ]
       ),
@@ -48750,9 +48794,26 @@ var render = function() {
               },
               [
                 _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.title,
+                      expression: "title"
+                    }
+                  ],
                   staticClass:
                     "title rounded-sm text-white outline-none py-1 px-2 font-bold w-full hover:opacity-50 placeholder-gray-100",
-                  attrs: { type: "text", placeholder: "Add board title" }
+                  attrs: { type: "text", placeholder: "Add board title" },
+                  domProps: { value: _vm.title },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.title = $event.target.value
+                    }
+                  }
                 })
               ]
             ),
@@ -48786,8 +48847,14 @@ var render = function() {
               "button",
               {
                 staticClass:
-                  "rounded-sm py-2 px-4 text-black hover:opacity-75 cursor-pointer",
-                class: _vm.colors[_vm.color]
+                  "rounded-sm py-2 px-4 text-black hover:opacity-75 cursor-pointer disabled:opacity-25",
+                class: _vm.colors[_vm.color],
+                attrs: { disabled: _vm.cannotCreate },
+                on: {
+                  click: function($event) {
+                    return _vm.addBoard()
+                  }
+                }
               },
               [_vm._v("\n                Create\n            ")]
             )
@@ -67429,6 +67496,139 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Modal_vue_vue_type_template_id_04d8a347_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
+
+
+/***/ }),
+
+/***/ "./resources/js/graphql/BoardAdd.gql":
+/*!*******************************************!*\
+  !*** ./resources/js/graphql/BoardAdd.gql ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"BoardAdd"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},"directives":[]},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"color"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"boardAdd"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}},{"kind":"Argument","name":{"kind":"Name","value":"color"},"value":{"kind":"Variable","name":{"kind":"Name","value":"color"}}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"color"},"arguments":[],"directives":[]}]}}]}}],"loc":{"start":0,"end":146}};
+    doc.loc.source = {"body":"mutation BoardAdd($title: String!, $color: String!) {\n    boardAdd(title: $title, color: $color) {\n        id\n        title\n        color\n    }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
+  
+
+    var names = {};
+    function unique(defs) {
+      return defs.filter(
+        function(def) {
+          if (def.kind !== 'FragmentDefinition') return true;
+          var name = def.name.value
+          if (names[name]) {
+            return false;
+          } else {
+            names[name] = true;
+            return true;
+          }
+        }
+      )
+    }
+  
+
+    // Collect any fragment/type references from a node, adding them to the refs Set
+    function collectFragmentReferences(node, refs) {
+      if (node.kind === "FragmentSpread") {
+        refs.add(node.name.value);
+      } else if (node.kind === "VariableDefinition") {
+        var type = node.type;
+        if (type.kind === "NamedType") {
+          refs.add(type.name.value);
+        }
+      }
+
+      if (node.selectionSet) {
+        node.selectionSet.selections.forEach(function(selection) {
+          collectFragmentReferences(selection, refs);
+        });
+      }
+
+      if (node.variableDefinitions) {
+        node.variableDefinitions.forEach(function(def) {
+          collectFragmentReferences(def, refs);
+        });
+      }
+
+      if (node.definitions) {
+        node.definitions.forEach(function(def) {
+          collectFragmentReferences(def, refs);
+        });
+      }
+    }
+
+    var definitionRefs = {};
+    (function extractReferences() {
+      doc.definitions.forEach(function(def) {
+        if (def.name) {
+          var refs = new Set();
+          collectFragmentReferences(def, refs);
+          definitionRefs[def.name.value] = refs;
+        }
+      });
+    })();
+
+    function findOperation(doc, name) {
+      for (var i = 0; i < doc.definitions.length; i++) {
+        var element = doc.definitions[i];
+        if (element.name && element.name.value == name) {
+          return element;
+        }
+      }
+    }
+
+    function oneQuery(doc, operationName) {
+      // Copy the DocumentNode, but clear out the definitions
+      var newDoc = {
+        kind: doc.kind,
+        definitions: [findOperation(doc, operationName)]
+      };
+      if (doc.hasOwnProperty("loc")) {
+        newDoc.loc = doc.loc;
+      }
+
+      // Now, for the operation we're running, find any fragments referenced by
+      // it or the fragments it references
+      var opRefs = definitionRefs[operationName] || new Set();
+      var allRefs = new Set();
+      var newRefs = new Set();
+
+      // IE 11 doesn't support "new Set(iterable)", so we add the members of opRefs to newRefs one by one
+      opRefs.forEach(function(refName) {
+        newRefs.add(refName);
+      });
+
+      while (newRefs.size > 0) {
+        var prevRefs = newRefs;
+        newRefs = new Set();
+
+        prevRefs.forEach(function(refName) {
+          if (!allRefs.has(refName)) {
+            allRefs.add(refName);
+            var childRefs = definitionRefs[refName] || new Set();
+            childRefs.forEach(function(childRef) {
+              newRefs.add(childRef);
+            });
+          }
+        });
+      }
+
+      allRefs.forEach(function(refName) {
+        var op = findOperation(doc, refName);
+        if (op) {
+          newDoc.definitions.push(op);
+        }
+      });
+
+      return newDoc;
+    }
+    
+    module.exports = doc;
+    
+        module.exports["BoardAdd"] = oneQuery(doc, "BoardAdd");
+        
 
 
 /***/ }),
