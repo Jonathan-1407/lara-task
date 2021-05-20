@@ -33,24 +33,44 @@
             </div>
         </DropdownMenu>
         <Modal
-            :width="300"
+            :width="400"
             :height="250"
             :show="showModal"
             @closed="showModal = false"
         >
             <div class="flex">
-                <div class="rounded-sm p-4 text-black w-full mr-2 bg-teal-700">
+                <div
+                    class="rounded-sm p-4 text-black w-full mr-2"
+                    :class="colors[color]"
+                >
                     <input
                         type="text"
                         placeholder="Add board title"
                         class="title rounded-sm text-white outline-none py-1 px-2 font-bold w-full hover:opacity-50 placeholder-gray-100"
                     />
                 </div>
+
+                <div>
+                    <div
+                        class="flex justify-between mb-2"
+                        v-for="(row, i) in colorGrid"
+                        :key="i"
+                    >
+                        <BoardColor
+                            v-for="(c, i) in row"
+                            :key="i"
+                            :color="c"
+                            :activeColor="color"
+                            @changed="color = $event"
+                        ></BoardColor>
+                    </div>
+                </div>
             </div>
 
             <div class="mt-4">
                 <button
-                    class="rounded-sm py-2 px-4 text-black cursor-pointer bg-teal-300 hover:bg-teal-500"
+                    :class="colors[color]"
+                    class="rounded-sm py-2 px-4 text-black hover:opacity-75 cursor-pointer"
                 >
                     Create
                 </button>
@@ -64,14 +84,21 @@ import { mapGetters } from "vuex";
 import ClickOutside from "vue-click-outside";
 import DropdownMenu from "./DropdownMenu";
 import Modal from "./modal/Modal";
+import BoardColor from "./modal/BoardColor";
 import UserBoards from "../../graphql/user/Boards.gql";
-import { colorMap100, colorMap200 } from "../../other/utils";
+import {
+    colorGrid,
+    colorMap100,
+    colorMap200,
+    colorMap500
+} from "../../other/utils";
 
 export default {
     name: "UserBoardsDropdown",
     components: {
         DropdownMenu,
-        Modal
+        Modal,
+        BoardColor
     },
     apollo: {
         userBoards: {
@@ -88,7 +115,9 @@ export default {
     },
     data: () => ({
         showBoards: false,
-        showModal: false
+        showModal: false,
+        color: "orange",
+        title: ""
     }),
     methods: {
         hide: function() {
@@ -98,7 +127,9 @@ export default {
     computed: {
         ...mapGetters(["currentUser"]),
         colorMap100: () => colorMap100,
-        colorMap200: () => colorMap200
+        colorMap200: () => colorMap200,
+        colors: () => colorMap500,
+        colorGrid: () => colorGrid
     },
     directives: {
         ClickOutside
