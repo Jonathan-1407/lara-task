@@ -45,7 +45,10 @@
                     @card-updated="updateQueryCache($event)"
                     @card-deleted="updateQueryCache($event)"
                 ></CardList>
-                <ListCardEditor></ListCardEditor>
+                <ListCardEditor
+                    :board_id="board.id"
+                    @list-added="updateQueryCache($event)"
+                ></ListCardEditor>
             </div>
         </div>
     </div>
@@ -63,7 +66,8 @@ import { colorMap500 } from "../other/utils";
 import {
     EVENT_CARD_ADDED,
     EVENT_CARD_UPDATED,
-    EVENT_CARD_DELETED
+    EVENT_CARD_DELETED,
+    EVENT_LIST_ADDED
 } from "../other/constants";
 
 export default {
@@ -116,6 +120,9 @@ export default {
             const listById = () =>
                 data.board.lists.find(list => list.id == event.list_id);
             switch (event.type) {
+                case EVENT_LIST_ADDED:
+                    data.board.lists.push(event.data);
+                    break;
                 case EVENT_CARD_ADDED:
                     data.board.lists;
                     listById().cards.push(event.data);
