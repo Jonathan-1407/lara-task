@@ -1,6 +1,7 @@
 import Vue from "vue";
 import ApolloClient from "apollo-boost";
 import VueApollo from "vue-apollo";
+import { AuthError, gqlErrors } from '../other/utils';
 
 Vue.use(VueApollo);
 
@@ -10,7 +11,16 @@ const apolloClient = new ApolloClient({
         "X-CSRF-TOKEN": document.querySelector("meta[name='csrf-token']")
             .content
     },
-    credentials: "include"
+    credentials: "include",
+    onError: err => {
+        try {
+            gqlErrors(err);
+        } catch (err) {
+            if (err instanceof AuthError) {
+                store.dispatch("logout");
+            }
+        }
+    }
 });
 
 export default new VueApollo({
