@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white sm:bg-gray-100 h-full h-sceen flex justify-center">
         <div class="container mt-2 sm:mt-10 flex flex-col items-center">
-            <div class="text-3xl text-blue-700 font-bold mb-10">
+            <div class="text-3xl text-indigo-700 font-bold mb-10">
                 <span>Lara Task</span>
             </div>
 
@@ -40,7 +40,7 @@
                             class="
                                 w-full rounded-sm px-4 py-2 
                                 text-white
-                                text-sam bg-blue-500 font-bold 
+                                text-sam bg-indigo-500 font-bold 
                                 outline-none focus:outline-none 
                                 hover:bg-opacity-75 disabled:opacity-25"
                         >
@@ -51,7 +51,7 @@
                 <div class="bg-gray-400 h-px w-full mb-6"></div>
                 <div class="text-center text-sm">
                     <router-link
-                        class="text-blue-600 hover:outline"
+                        class="text-indigo-600 hover:outline"
                         :to="{ name: 'Register' }"
                     >
                         Sign up for an account

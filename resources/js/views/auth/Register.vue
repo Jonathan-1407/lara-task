@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white sm:bg-gray-100 h-full h-sceen flex justify-center">
         <div class="container mt-2 sm:mt-10 flex flex-col items-center">
-            <div class="text-3xl text-blue-700 font-bold mb-10">
+            <div class="text-3xl text-indigo-700 font-bold mb-10">
                 <span>Lara Task</span>
             </div>
             <div class="w-full sm:shadow-xl sm:bg-white sm:py-8 sm:px-12">
@@ -64,7 +64,7 @@
                 <div class="bg-gray-400 h-px w-full mb-6"></div>
                 <div class="text-center text-sm">
                     <router-link
-                        class="text-blue-600 hover:outline"
+                        class="text-indigo-600 hover:outline"
                         :to="{ name: 'Login' }"
                     >
                         Already have an account? Log in
