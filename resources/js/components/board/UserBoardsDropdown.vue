@@ -171,6 +171,11 @@ export default {
     },
     directives: {
         ClickOutside
+    },
+    mounted: function() {
+        if (!this.$route.params.id) {
+            this.showModal = true;
+        }
     }
 };
 </script>

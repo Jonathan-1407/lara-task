@@ -5,7 +5,9 @@
                 <UserBoardsDropdown v-if="isLoggedIn"></UserBoardsDropdown>
             </div>
             <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">
-                Lara Task
+                <router-link :to="{ name: 'Home' }">
+                    Lara Task
+                </router-link>
             </div>
             <div class="mr-2 w-1/3 flex justify-end">
                 <div v-if="isLoggedIn" class="flex flex-wrap content-start">
@@ -27,9 +29,12 @@
             </div>
         </div>
         <div
-            class="h-full flex flex-1 flex-col items-stretch"
+            class="h-full flex flex-1 flex-col items-center"
             v-if="$apollo.queries.board.loading"
         >
+            <div
+                class="loader ease-linear rounded-full border-4 border-t-4 border-white h-12 w-12 mb-2"
+            ></div>
             <span class="text-white">Loading...</span>
         </div>
         <div class="h-full flex flex-1 flex-col items-stretch" v-else>
@@ -47,6 +52,7 @@
                 ></CardList>
                 <ListCardEditor
                     :board_id="board.id"
+                    v-if="board.owner.id == currentUser.id"
                     @list-added="updateQueryCache($event)"
                 ></ListCardEditor>
             </div>
@@ -108,6 +114,8 @@ export default {
             if (response.data?.logout?.id) {
                 self.logout();
             }
+
+            this.$router.push({ name: "Home" });
         },
         updateQueryCache: function(event) {
             let self = this;
@@ -149,5 +157,28 @@ export default {
 .header {
     height: 40px;
     background-color: rgba(0, 0, 0, 0.2);
+}
+.loader {
+    border-top-color: #667eea;
+    -webkit-animation: spinner 1s linear infinite;
+    animation: spinner 1s linear infinite;
+}
+
+@-webkit-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 </style>

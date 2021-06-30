@@ -2,7 +2,11 @@
     <div class="bg-white sm:bg-gray-100 h-full h-sceen flex justify-center">
         <div class="container mt-2 sm:mt-10 flex flex-col items-center">
             <div class="text-3xl text-indigo-700 font-bold mb-10">
-                <span>Lara Task</span>
+                <span>
+                    <router-link :to="{ name: 'Home' }">
+                        Lara Task
+                    </router-link>
+                </span>
             </div>
             <div class="w-full sm:shadow-xl sm:bg-white sm:py-8 sm:px-12">
                 <Errors :errors="errors"></Errors>

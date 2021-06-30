@@ -6268,6 +6268,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }),
   directives: {
     ClickOutside: vue_click_outside__WEBPACK_IMPORTED_MODULE_1___default.a
+  },
+  mounted: function mounted() {
+    if (!this.$route.params.id) {
+      this.showModal = true;
+    }
   }
 });
 
@@ -6562,6 +6567,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6620,7 +6631,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   self.logout();
                 }
 
-              case 5:
+                this.$router.push({
+                  name: "Home"
+                });
+
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -6691,6 +6706,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -7432,8 +7454,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Home"
+  name: "Home",
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["isLoggedIn"]))
 });
 
 /***/ }),
@@ -7466,6 +7499,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -7636,6 +7673,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -7944,7 +7985,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".header {\n  height: 40px;\n  background-color: rgba(0, 0, 0, 0.2);\n}\n", ""]);
+exports.push([module.i, ".header {\n  height: 40px;\n  background-color: rgba(0, 0, 0, 0.2);\n}\n.loader {\n  border-top-color: #667eea;\n  -webkit-animation: spinner 1s linear infinite;\n  animation: spinner 1s linear infinite;\n}\n@-webkit-keyframes spinner {\n0% {\n    -webkit-transform: rotate(0deg);\n}\n100% {\n    -webkit-transform: rotate(360deg);\n}\n}\n@keyframes spinner {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n", ""]);
 
 // exports
 
@@ -50181,7 +50222,12 @@ var render = function() {
             {
               staticClass: "text-lg opacity-50 cursor-pointer hover:opacity-75"
             },
-            [_vm._v("\n            Lara Task\n        ")]
+            [
+              _c("router-link", { attrs: { to: { name: "Home" } } }, [
+                _vm._v("\n                Lara Task\n            ")
+              ])
+            ],
+            1
           ),
           _vm._v(" "),
           _c("div", { staticClass: "mr-2 w-1/3 flex justify-end" }, [
@@ -50247,8 +50293,15 @@ var render = function() {
       _vm.$apollo.queries.board.loading
         ? _c(
             "div",
-            { staticClass: "h-full flex flex-1 flex-col items-stretch" },
-            [_c("span", { staticClass: "text-white" }, [_vm._v("Loading...")])]
+            { staticClass: "h-full flex flex-1 flex-col items-center" },
+            [
+              _c("div", {
+                staticClass:
+                  "loader ease-linear rounded-full border-4 border-t-4 border-white h-12 w-12 mb-2"
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-white" }, [_vm._v("Loading...")])
+            ]
           )
         : _c(
             "div",
@@ -50286,14 +50339,16 @@ var render = function() {
                     })
                   }),
                   _vm._v(" "),
-                  _c("ListCardEditor", {
-                    attrs: { board_id: _vm.board.id },
-                    on: {
-                      "list-added": function($event) {
-                        return _vm.updateQueryCache($event)
-                      }
-                    }
-                  })
+                  _vm.board.owner.id == _vm.currentUser.id
+                    ? _c("ListCardEditor", {
+                        attrs: { board_id: _vm.board.id },
+                        on: {
+                          "list-added": function($event) {
+                            return _vm.updateQueryCache($event)
+                          }
+                        }
+                      })
+                    : _vm._e()
                 ],
                 2
               )
@@ -50341,48 +50396,72 @@ var render = function() {
             [
               _vm._m(0),
               _vm._v(" "),
-              _c(
-                "router-link",
-                {
-                  staticClass:
-                    "md:ml-auto flex flex-wrap items-center text-base justify-center",
-                  attrs: { to: { name: "Register" } }
-                },
-                [
-                  _c("a", { staticClass: "mr-5 hover:text-gray-900" }, [
-                    _vm._v("Sign up")
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                {
-                  staticClass:
-                    "inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0",
-                  attrs: { to: { name: "Login" } }
-                },
-                [
-                  _vm._v("\n                Sign in\n                "),
-                  _c(
-                    "svg",
-                    {
-                      staticClass: "w-4 h-4 ml-1",
-                      attrs: {
-                        fill: "none",
-                        stroke: "currentColor",
-                        "stroke-linecap": "round",
-                        "stroke-linejoin": "round",
-                        "stroke-width": "2",
-                        viewBox: "0 0 24 24"
-                      }
-                    },
-                    [_c("path", { attrs: { d: "M5 12h14M12 5l7 7-7 7" } })]
-                  )
-                ]
-              )
+              !_vm.isLoggedIn
+                ? [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass:
+                          "md:ml-auto flex flex-wrap items-center text-base justify-center",
+                        attrs: { to: { name: "Register" } }
+                      },
+                      [
+                        _c("a", { staticClass: "mr-5 hover:text-gray-900" }, [
+                          _vm._v("Sign up")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass:
+                          "inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0",
+                        attrs: { to: { name: "Login" } }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    Sign in\n                    "
+                        ),
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "w-4 h-4 ml-1",
+                            attrs: {
+                              fill: "none",
+                              stroke: "currentColor",
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round",
+                              "stroke-width": "2",
+                              viewBox: "0 0 24 24"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: { d: "M5 12h14M12 5l7 7-7 7" }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                : [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass:
+                          "md:ml-auto flex flex-wrap items-center text-base justify-center inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0",
+                        attrs: { to: { name: "Board" } }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    Dashboard\n                "
+                        )
+                      ]
+                    )
+                  ]
             ],
-            1
+            2
           )
         ]
       ),
@@ -51187,7 +51266,7 @@ var staticRenderFns = [
       {
         staticClass:
           "flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0",
-        attrs: { href: "#", target: "_blank" }
+        attrs: { href: "#" }
       },
       [
         _c("span", { staticClass: "ml-3 text-xl font-bold" }, [
@@ -51779,7 +51858,21 @@ var render = function() {
         "div",
         { staticClass: "container mt-2 sm:mt-10 flex flex-col items-center" },
         [
-          _vm._m(0),
+          _c(
+            "div",
+            { staticClass: "text-3xl text-indigo-700 font-bold mb-10" },
+            [
+              _c(
+                "span",
+                [
+                  _c("router-link", { attrs: { to: { name: "Home" } } }, [
+                    _vm._v("\n                    Lara Task\n                ")
+                  ])
+                ],
+                1
+              )
+            ]
+          ),
           _vm._v(" "),
           _c(
             "div",
@@ -51851,7 +51944,7 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _vm._m(0)
                 ]
               ),
               _vm._v(" "),
@@ -51885,16 +51978,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "text-3xl text-indigo-700 font-bold mb-10" },
-      [_c("span", [_vm._v("Lara Task")])]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -51943,7 +52026,21 @@ var render = function() {
         "div",
         { staticClass: "container mt-2 sm:mt-10 flex flex-col items-center" },
         [
-          _vm._m(0),
+          _c(
+            "div",
+            { staticClass: "text-3xl text-indigo-700 font-bold mb-10" },
+            [
+              _c(
+                "span",
+                [
+                  _c("router-link", { attrs: { to: { name: "Home" } } }, [
+                    _vm._v("\n                    Lara Task\n                ")
+                  ])
+                ],
+                1
+              )
+            ]
+          ),
           _vm._v(" "),
           _c(
             "div",
@@ -52048,7 +52145,7 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _vm._m(0)
                 ]
               ),
               _vm._v(" "),
@@ -52082,16 +52179,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "text-3xl text-indigo-700 font-bold mb-10" },
-      [_c("span", [_vm._v("Lara Task")])]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -70437,8 +70524,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports) {
 
 
-    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"board"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"color"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"lists"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"board_id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"board"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"owner"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"cards"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"order"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"owner"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]}]}}]}}]}}]}}]}}],"loc":{"start":0,"end":427}};
-    doc.loc.source = {"body":"query($id: ID!) {\n    board(id: $id) {\n        id\n        title\n        color\n        lists {\n            id\n            title\n            board_id\n            board {\n                owner {\n                    id\n                }\n            }\n            cards {\n                id\n                title\n                order\n                owner {\n                    id\n                }\n            }\n        }\n    }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
+    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"board"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"color"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"lists"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"board_id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"board"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"owner"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"cards"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"order"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"owner"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"owner"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]}]}}]}}]}}],"loc":{"start":0,"end":468}};
+    doc.loc.source = {"body":"query($id: ID!) {\n    board(id: $id) {\n        id\n        title\n        color\n        lists {\n            id\n            title\n            board_id\n            board {\n                owner {\n                    id\n                }\n            }\n            cards {\n                id\n                title\n                order\n                owner {\n                    id\n                }\n            }\n        }\n        owner {\n            id\n        }\n    }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
   
 
     var names = {};
@@ -72538,8 +72625,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/jonathan/Documents/workspace/laravel/lara-task/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/jonathan/Documents/workspace/laravel/lara-task/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /home/jonathanc/Documents/workspace/laravel/lara-task/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/jonathanc/Documents/workspace/laravel/lara-task/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })
